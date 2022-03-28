@@ -31,7 +31,29 @@ public class Test {
 		r1.getUpperLeftPoint().setX(10);
 		r1.getUpperLeftPoint().setY(15);
 		c1.setCenter(r1.getUpperLeftPoint());
-		c1.getCenter().setX(r1.area()-l1.getStartPoint().getY());
+		c1.getCenter().setX(r1.area() - l1.getStartPoint().getY());
+		// Vezbe 4
+				/*
+				 * 1.Postaviti koordinatu x centra ranije kreiranog kruga k na vrednost zbira
+				 * vrednosti poluprecnika kruga k i vrednosti koja predstavlja udaljenost
+				 * pocetne i krajnje tacke prethodno kreirane linije lin (NE duzine). Sve
+				 * objekte kreirati samostalno.
+				 */
+		c1.getCenter().setX(c1.getRadius()+(int)l1.getStartPoint().distance(l1.getEndPoint().getX(), l1.getEndPoint().getY()));
+		Point p2=new Point();
+		p2.setX(10);
+		p2.setY(15);
+		Point p3=new Point(10,15);
+		System.out.println("Koordinata X je: "+p3.getX());
+		System.out.println("Koordinata Y je: "+p3.getY());
+		System.out.println("p3:"+p3);
+		System.out.println("p3:"+p3.toString());
+		
+		
+		Point p5=new Point(10,15);
+		Point p6=new Point(10,15);
+		System.out.println(p5==p6);
+		System.out.println(p5.equals(p6));
 	}
-
+	
 }

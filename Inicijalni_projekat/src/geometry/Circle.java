@@ -3,6 +3,7 @@ package geometry;
 public class Circle {
 	private Point center;
 	private int radius;
+	private boolean selected;
 
 	public double area() {
 		return radius * getRadius() * Math.PI;
@@ -26,5 +27,13 @@ public class Circle {
 
 	public void setRadius(int radius) {
 		this.radius = radius;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public boolean isSelected() {
+		return this.selected;
 	}
 }
