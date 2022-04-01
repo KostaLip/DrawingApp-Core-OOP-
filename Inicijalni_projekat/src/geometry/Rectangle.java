@@ -6,6 +6,33 @@ public class Rectangle {
 	private int height;
 	private boolean selected;
 
+	public Rectangle() {
+	}
+
+	public Rectangle(Point upperLeftPoint, int width, int height) {
+		this.upperLeftPoint = upperLeftPoint;
+		this.width = width;
+		this.height = height;
+	}
+
+	public Rectangle(Point upperLeftPoint, int width, int height, boolean selected) {
+
+		this(upperLeftPoint, width, height);
+		this.selected = selected;
+	}
+
+	public boolean equals(Object obj) {
+		if (obj instanceof Rectangle) {
+			Rectangle pomocna = (Rectangle) obj;
+			if (this.upperLeftPoint.equals(pomocna.upperLeftPoint) && this.width == pomocna.width
+					&& this.height == pomocna.height)
+				return true;
+			else
+				return false;
+		} else
+			return false;
+	}
+
 	public int area() {
 		return width * height;
 	}
@@ -44,5 +71,9 @@ public class Rectangle {
 
 	public Point getUpperLeftPoint() {
 		return upperLeftPoint;
+	}
+
+	public String toString() {
+		return "Upper left point:" + upperLeftPoint + ", width =" + width + ",height = " + height;
 	}
 }
