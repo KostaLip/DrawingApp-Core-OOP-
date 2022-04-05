@@ -24,9 +24,9 @@ public class Point {
 	}
 
 	public boolean equals(Object obj) {
-		if (obj instanceof Point) {
-			Point pomocna = (Point) obj;
-			if (this.x == pomocna.x && this.y == pomocna.y) {
+		if(obj instanceof Point) {
+			Point pomocna=(Point)obj;
+			if(this.x==pomocna.x && this.y==pomocna.y) {
 				return true;
 			}
 		}
