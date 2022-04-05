@@ -29,6 +29,10 @@ public class Line {
 			return false;
 	}
 
+	public double length() {
+		return this.startPoint.distance(endPoint.getX(), getEndPoint().getY());
+	}
+
 	public void setStartPoint(Point startPoint) {
 		this.startPoint = startPoint;
 	}
@@ -51,10 +55,6 @@ public class Line {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
-	}
-
-	public double length() {
-		return this.startPoint.distance(endPoint.getX(), endPoint.getY());
 	}
 
 	public String toString() {

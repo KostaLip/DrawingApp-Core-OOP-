@@ -56,12 +56,12 @@ public class Circle {
 		this.radius = radius;
 	}
 
-	public void setSelected(boolean selected) {
-		this.selected = selected;
+	public boolean isSelected() {
+		return selected;
 	}
 
-	public boolean isSelected() {
-		return this.selected;
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 
 	public String toString() {

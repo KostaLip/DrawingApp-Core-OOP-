@@ -11,10 +11,14 @@ public class Point {
 
 	public Point(int x, int y) {
 		this.x = x;
-		this.y = y;
+		setY(y);
 	}
 
 	public Point(int x, int y, boolean selected) {
+		/*
+		 * this.x=x; setY(y);
+		 */
+		// uvek prva naredba
 		this(x, y);
 		setSelected(selected);
 	}
@@ -60,7 +64,13 @@ public class Point {
 		this.selected = selected;
 	}
 
-	public String toString(int x) {
+	public String toString() {
+		// nije pravilno
+		// return x;
+
+		// jeste pravilno ali ne zelimo tako da ispisemo tacku
+		// return String.valueOf(x);
+
 		return "(" + x + "," + y + ")";
 	}
 
