@@ -76,4 +76,14 @@ public class Rectangle {
 	public String toString() {
 		return "Upper left point:" + upperLeftPoint + ", width =" + width + ",height = " + height;
 	}
+
+	public boolean contains(int x, int y) {
+		return x >= upperLeftPoint.getX() && x <= this.upperLeftPoint.getX() + width && y >= upperLeftPoint.getY()
+				&& y <= upperLeftPoint.getY() + height;
+	}
+
+	public boolean contains(Point clickPoint) {
+		return clickPoint.getX() >= upperLeftPoint.getX() && clickPoint.getX() <= this.upperLeftPoint.getX() + width
+				&& clickPoint.getY() >= upperLeftPoint.getY() && clickPoint.getY() <= upperLeftPoint.getY() + height;
+	}
 }
