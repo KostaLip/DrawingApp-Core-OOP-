@@ -7,6 +7,7 @@ public class Line extends Shape {
 	private Point endPoint;
 
 	public Line() {
+
 	}
 
 	public Line(Point startPoint, Point endPoint) {

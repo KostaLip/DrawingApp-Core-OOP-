@@ -25,5 +25,8 @@ public class Drawing extends JPanel {
 		g.setColor(Color.black);
 		Donut d = new Donut(new Point(350, 450), 70, 50, true);
 		d.draw(g);
+		g.setColor(Color.ORANGE);
+		Rectangle rec=new Rectangle(new Point(200,300,true),80,90);
+		rec.draw(g);
 	}
 }
