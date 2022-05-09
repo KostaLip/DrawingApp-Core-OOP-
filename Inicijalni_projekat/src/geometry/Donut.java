@@ -39,12 +39,24 @@ public class Donut extends Circle {
 		}
 	}
 
+	public int compareTo(Object obj) {
+		if (obj instanceof Donut) {
+			Donut shapeToCompare = (Donut) obj;
+			return (int) (this.area() - shapeToCompare.area());
+		}
+		return 0;
+	}
+
 	public double area() {
 		return super.area() - innerRadius * innerRadius * Math.PI;
 	}
 
 	public boolean contains(int x, int y) {
 		return super.contains(x, y) && getCenter().distance(x, y) <= innerRadius;
+	}
+
+	public boolean contains(Point clickPoint) {
+		return super.contains(clickPoint) && getCenter().distance(clickPoint.getX(), clickPoint.getY()) <= innerRadius;
 	}
 
 	public void draw(Graphics g) {

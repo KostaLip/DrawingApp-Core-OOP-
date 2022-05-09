@@ -1,5 +1,7 @@
 package geometry;
 
+import java.util.Arrays;
+
 public class Test {
 
 	public static void main(String[] args) {
@@ -123,5 +125,24 @@ public class Test {
 		Donut d1 = new Donut(p5, 20, 10, true);
 		Donut d2 = new Donut(p5, 15, 10, true);
 		System.out.println(d1.equals(d2));
+
+		Point movePoint = new Point(10, 15);
+		System.out.println(movePoint);
+		movePoint.moveTo(42, 31);
+		System.out.println(movePoint);
+		movePoint.moveBy(13, 81);
+		System.out.println(movePoint);
+		movePoint.compareTo(p);
+		Rectangle[] kocke = new Rectangle[3];
+		kocke[0] = new Rectangle(movePoint, 3123, 123);
+		kocke[1] = new Rectangle(p, 3123, 12312);
+		kocke[2] = new Rectangle(p1, 111, 231);
+		for (int j = 0; j < kocke.length; j++) {
+			System.out.println(kocke[j]);
+		}
+		Arrays.sort(kocke);
+		for (int j = 0; j < kocke.length; j++) {
+			System.out.println(kocke[j]);
+		}
 	}
 }

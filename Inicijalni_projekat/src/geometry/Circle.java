@@ -33,6 +33,23 @@ public class Circle extends Shape {
 		}
 	}
 
+	public void moveTo(int x, int y) {
+		this.center.moveTo(x, y);
+	}
+
+	public void moveBy(int byX, int byY) {
+		this.center.moveBy(byX, byY);
+
+	}
+
+	public int compareTo(Object obj) {
+		if (obj instanceof Circle) {
+			Circle shapeToCompare = (Circle) obj;
+			return (int) (this.area() - shapeToCompare.area());
+		}
+		return 0;
+	}
+
 	public double area() {
 		return radius * getRadius() * Math.PI;
 	}
@@ -73,4 +90,5 @@ public class Circle extends Shape {
 	public boolean contains(Point clickPoint) {
 		return center.distance(clickPoint.getX(), clickPoint.getY()) <= radius;
 	}
+
 }

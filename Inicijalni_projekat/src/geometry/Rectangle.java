@@ -38,6 +38,23 @@ public class Rectangle extends Shape {
 		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height);
 	}
 
+	public void moveTo(int x, int y) {
+		this.upperLeftPoint.moveTo(x, y);
+	}
+
+	public void moveBy(int byX, int byY) {
+		this.upperLeftPoint.moveBy(byX, byY);
+
+	}
+
+	public int compareTo(Object obj) {
+		if (obj instanceof Rectangle) {
+			Rectangle shapeToCompare = (Rectangle) obj;
+			return (this.area() - shapeToCompare.area());
+		}
+		return 0;
+	}
+
 	public int area() {
 		return width * height;
 	}
@@ -83,4 +100,5 @@ public class Rectangle extends Shape {
 		return clickPoint.getX() >= upperLeftPoint.getX() && clickPoint.getX() <= this.upperLeftPoint.getX() + width
 				&& clickPoint.getY() >= upperLeftPoint.getY() && clickPoint.getY() <= upperLeftPoint.getY() + height;
 	}
+
 }
