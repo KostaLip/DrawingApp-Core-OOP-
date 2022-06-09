@@ -59,27 +59,6 @@ public class Circle extends Shape {
 		return 2 * radius * Math.PI;
 	}
 
-	public Point getCenter() {
-		return center;
-	}
-
-	public void setCenter(Point center) {
-		this.center = center;
-	}
-
-	public int getRadius() {
-		return this.radius;
-	}
-
-	public void setRadius(int radius) {
-		this.radius = radius;
-	}
-
-	public String toString() {
-		// Center=(x,y), radius= radius
-		return "Center=" + center + ", radius=" + radius;
-	}
-
 	public boolean contains(int x, int y) {
 		return center.distance(x, y) <= radius;
 	}
@@ -103,4 +82,23 @@ public class Circle extends Shape {
 		return center.distance(clickPoint.getX(), clickPoint.getY()) <= radius;
 	}
 
+	public Point getCenter() {
+		return center;
+	}
+
+	public void setCenter(Point center) {
+		this.center = center;
+	}
+
+	public int getRadius() {
+		return this.radius;
+	}
+
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+
+	public String toString() {
+		return "Center=" + center + ", radius=" + radius;
+	}
 }

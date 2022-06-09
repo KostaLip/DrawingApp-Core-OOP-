@@ -17,10 +17,6 @@ public class Point extends Shape {
 	}
 
 	public Point(int x, int y, boolean selected) {
-		/*
-		 * this.x=x; setY(y);
-		 */
-		// uvek prva naredba
 		this(x, y);
 		setSelected(selected);
 	}
@@ -98,12 +94,6 @@ public class Point extends Shape {
 	}
 
 	public String toString() {
-		// nije pravilno
-		// return x;
-
-		// jeste pravilno ali ne zelimo tako da ispisemo tacku
-		// return String.valueOf(x);
-
 		return "(" + x + "," + y + ")";
 	}
 

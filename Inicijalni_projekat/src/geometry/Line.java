@@ -68,6 +68,15 @@ public class Line extends Shape {
 		return 0;
 	}
 
+	public boolean contains(int x, int y) {
+		return this.startPoint.distance(x, y) + this.endPoint.distance(x, y) - length() <= 2;
+	}
+
+	public boolean contains(Point clickPoint) {
+		return this.startPoint.distance(clickPoint.getX(), clickPoint.getY())
+				+ this.endPoint.distance(clickPoint.getX(), clickPoint.getY()) - length() <= 2;
+	}
+
 	public void setStartPoint(Point startPoint) {
 		this.startPoint = startPoint;
 	}
@@ -83,18 +92,8 @@ public class Line extends Shape {
 	public void setEndPoint(Point endPoint) {
 		this.endPoint = endPoint;
 	}
-
+	
 	public String toString() {
 		return startPoint + "-- >" + endPoint;
 	}
-
-	public boolean contains(int x, int y) {
-		return this.startPoint.distance(x, y) + this.endPoint.distance(x, y) - length() <= 2;
-	}
-
-	public boolean contains(Point clickPoint) {
-		return this.startPoint.distance(clickPoint.getX(), clickPoint.getY())
-				+ this.endPoint.distance(clickPoint.getX(), clickPoint.getY()) - length() <= 2;
-	}
-
 }

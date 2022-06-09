@@ -11,19 +11,7 @@ public class Donut extends Circle {
 	}
 
 	public Donut(Point center, int radius, int innerRadius, boolean selected) {
-		/*
-		 * setCenter(center); this.radius=radius; setSelected(selected);
-		 * this.innerRadius=innerRadius;
-		 */
 		super(center, radius, selected);
-		this.innerRadius = innerRadius;
-	}
-
-	public int getInnerRadius() {
-		return this.innerRadius;
-	}
-
-	public void setInnerRadius(int innerRadius) {
 		this.innerRadius = innerRadius;
 	}
 
@@ -75,6 +63,14 @@ public class Donut extends Circle {
 			g.setColor(Color.black);
 		}
 
+	}
+
+	public int getInnerRadius() {
+		return this.innerRadius;
+	}
+
+	public void setInnerRadius(int innerRadius) {
+		this.innerRadius = innerRadius;
 	}
 
 	public String toString() {
