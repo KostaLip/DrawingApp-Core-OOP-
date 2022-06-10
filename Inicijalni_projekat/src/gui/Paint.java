@@ -173,19 +173,8 @@ public class Paint extends JFrame {
 		tglBtnEdit.setPreferredSize(new Dimension(110, 30));
 
 		JPanel drawingPanel = new JPanel();
-		drawingPanel.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if (tglBtnPoint.isSelected()) {
-					shapes.add(new Point(e.getX(), e.getY()));
-				}
-			}
-		});
 		contentPane.add(drawingPanel, BorderLayout.CENTER);
 		drawingPanel.setBorder(blackline);
-		Iterator<Shape> it = shapes.iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next());
-		}
 	}
 
 }

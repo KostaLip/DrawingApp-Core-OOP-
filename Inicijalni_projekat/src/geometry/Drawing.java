@@ -19,14 +19,7 @@ public class Drawing extends JPanel {
 	}
 
 	public void paint(Graphics g) {
-		/*
-		 * Point p = new Point(300,300); p.draw(g); g.setColor(Color.red); Point
-		 * startPoint=new Point(100,200); Line l = new Line(startPoint, new
-		 * Point(300,400)); l.draw(g); g.setColor(Color.black); Donut d = new Donut(new
-		 * Point(350,450), 70, 50, true); d.draw(g);
-		 */
 
-		// Vezbe 8.
 		Point p = new Point(50, 50);
 
 		Line l1 = new Line(new Point(100, 100), new Point(200, 200));
@@ -64,15 +57,15 @@ public class Drawing extends JPanel {
 		shapes.get(3).draw(g);
 
 		shapes.add(3, l1);
-		
+
 		try {
 			c1.setRadius(-10);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
-		
-		System.out.println("4. zadataka");	
+
+		System.out.println("4. zadataka");
 		it = shapes.iterator();
 		while (it.hasNext()) {
 			Shape sh = it.next();
