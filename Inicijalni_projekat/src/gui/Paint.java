@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import gui.Drawing;
 import geometry.Point;
 import geometry.Shape;
 
@@ -26,6 +27,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Paint extends JFrame {
 
@@ -33,6 +36,7 @@ public class Paint extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	Border blackline = BorderFactory.createLineBorder(Color.black);
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
+	public Drawing panel = new Drawing(this);
 
 	/**
 	 * Launch the application.
@@ -72,7 +76,7 @@ public class Paint extends JFrame {
 				Double.MIN_VALUE };
 		gbl_pnlBtns.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlBtns.setLayout(gbl_pnlBtns);
-		
+
 		JLabel lblShapes = new JLabel("Shapes");
 		GridBagConstraints gbc_lblShapes = new GridBagConstraints();
 		gbc_lblShapes.anchor = GridBagConstraints.SOUTHWEST;
@@ -80,9 +84,15 @@ public class Paint extends JFrame {
 		gbc_lblShapes.gridx = 0;
 		gbc_lblShapes.gridy = 0;
 		pnlBtns.add(lblShapes, gbc_lblShapes);
-		lblShapes.setPreferredSize(new Dimension(140,50));
+		lblShapes.setPreferredSize(new Dimension(140, 50));
 
 		JToggleButton tglBtnPoint = new JToggleButton("Point");
+		tglBtnPoint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dlgPoint dlgP = new dlgPoint();
+				dlgP.setVisible(true);
+			}
+		});
 		tglBtnPoint.setSelected(true);
 		buttonGroup.add(tglBtnPoint);
 		tglBtnPoint.setBackground(Color.LIGHT_GRAY);
@@ -94,6 +104,12 @@ public class Paint extends JFrame {
 		tglBtnPoint.setPreferredSize(new Dimension(100, 50));
 
 		JToggleButton tglBtnLine = new JToggleButton("Line");
+		tglBtnLine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dlgLine dlgL = new dlgLine();
+				dlgL.setVisible(true);
+			}
+		});
 		buttonGroup.add(tglBtnLine);
 		tglBtnLine.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnLine = new GridBagConstraints();
@@ -104,6 +120,12 @@ public class Paint extends JFrame {
 		tglBtnLine.setPreferredSize(new Dimension(100, 50));
 
 		JToggleButton tglBtnRectangle = new JToggleButton("Rectangle");
+		tglBtnRectangle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dlgRectangle dlgR = new dlgRectangle();
+				dlgR.setVisible(true);
+			}
+		});
 		buttonGroup.add(tglBtnRectangle);
 		tglBtnRectangle.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnRectangle = new GridBagConstraints();
@@ -114,6 +136,12 @@ public class Paint extends JFrame {
 		tglBtnRectangle.setPreferredSize(new Dimension(100, 50));
 
 		JToggleButton tglBtnCircle = new JToggleButton("Circle");
+		tglBtnCircle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dlgCircle dlgC = new dlgCircle();
+				dlgC.setVisible(true);
+			}
+		});
 		buttonGroup.add(tglBtnCircle);
 		tglBtnCircle.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnCircle = new GridBagConstraints();
@@ -124,6 +152,12 @@ public class Paint extends JFrame {
 		tglBtnCircle.setPreferredSize(new Dimension(100, 50));
 
 		JToggleButton tglBtnDonut = new JToggleButton("Donut");
+		tglBtnDonut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dlgDonut dlgD = new dlgDonut();
+				dlgD.setVisible(true);
+			}
+		});
 		buttonGroup.add(tglBtnDonut);
 		tglBtnDonut.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnDonut = new GridBagConstraints();
@@ -132,7 +166,7 @@ public class Paint extends JFrame {
 		gbc_tglBtnDonut.gridy = 0;
 		pnlBtns.add(tglBtnDonut, gbc_tglBtnDonut);
 		tglBtnDonut.setPreferredSize(new Dimension(100, 50));
-		
+
 		JLabel lblOptions = new JLabel("Options");
 		GridBagConstraints gbc_lblOptions = new GridBagConstraints();
 		gbc_lblOptions.anchor = GridBagConstraints.WEST;
