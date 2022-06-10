@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JLabel;
 
 public class Paint extends JFrame {
 
@@ -53,6 +54,7 @@ public class Paint extends JFrame {
 	 * Create the frame.
 	 */
 	public Paint() {
+		setTitle("Paint");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 865, 551);
 		contentPane = new JPanel();
@@ -61,14 +63,24 @@ public class Paint extends JFrame {
 		setContentPane(contentPane);
 
 		JPanel pnlBtns = new JPanel();
+		pnlBtns.setBackground(Color.PINK);
 		contentPane.add(pnlBtns, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlBtns = new GridBagLayout();
-		gbl_pnlBtns.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnlBtns.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_pnlBtns.rowHeights = new int[] { 0, 0, 0, 0 };
-		gbl_pnlBtns.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		gbl_pnlBtns.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_pnlBtns.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlBtns.setLayout(gbl_pnlBtns);
+		
+		JLabel lblShapes = new JLabel("Shapes");
+		GridBagConstraints gbc_lblShapes = new GridBagConstraints();
+		gbc_lblShapes.anchor = GridBagConstraints.SOUTHWEST;
+		gbc_lblShapes.insets = new Insets(0, 0, 5, 5);
+		gbc_lblShapes.gridx = 0;
+		gbc_lblShapes.gridy = 0;
+		pnlBtns.add(lblShapes, gbc_lblShapes);
+		lblShapes.setPreferredSize(new Dimension(140,50));
 
 		JToggleButton tglBtnPoint = new JToggleButton("Point");
 		tglBtnPoint.setSelected(true);
@@ -76,7 +88,7 @@ public class Paint extends JFrame {
 		tglBtnPoint.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnPoint = new GridBagConstraints();
 		gbc_tglBtnPoint.insets = new Insets(0, 0, 5, 5);
-		gbc_tglBtnPoint.gridx = 0;
+		gbc_tglBtnPoint.gridx = 1;
 		gbc_tglBtnPoint.gridy = 0;
 		pnlBtns.add(tglBtnPoint, gbc_tglBtnPoint);
 		tglBtnPoint.setPreferredSize(new Dimension(100, 50));
@@ -86,7 +98,7 @@ public class Paint extends JFrame {
 		tglBtnLine.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnLine = new GridBagConstraints();
 		gbc_tglBtnLine.insets = new Insets(0, 0, 5, 5);
-		gbc_tglBtnLine.gridx = 3;
+		gbc_tglBtnLine.gridx = 4;
 		gbc_tglBtnLine.gridy = 0;
 		pnlBtns.add(tglBtnLine, gbc_tglBtnLine);
 		tglBtnLine.setPreferredSize(new Dimension(100, 50));
@@ -96,7 +108,7 @@ public class Paint extends JFrame {
 		tglBtnRectangle.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnRectangle = new GridBagConstraints();
 		gbc_tglBtnRectangle.insets = new Insets(0, 0, 5, 5);
-		gbc_tglBtnRectangle.gridx = 6;
+		gbc_tglBtnRectangle.gridx = 7;
 		gbc_tglBtnRectangle.gridy = 0;
 		pnlBtns.add(tglBtnRectangle, gbc_tglBtnRectangle);
 		tglBtnRectangle.setPreferredSize(new Dimension(100, 50));
@@ -106,7 +118,7 @@ public class Paint extends JFrame {
 		tglBtnCircle.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnCircle = new GridBagConstraints();
 		gbc_tglBtnCircle.insets = new Insets(0, 0, 5, 5);
-		gbc_tglBtnCircle.gridx = 9;
+		gbc_tglBtnCircle.gridx = 10;
 		gbc_tglBtnCircle.gridy = 0;
 		pnlBtns.add(tglBtnCircle, gbc_tglBtnCircle);
 		tglBtnCircle.setPreferredSize(new Dimension(100, 50));
@@ -116,10 +128,18 @@ public class Paint extends JFrame {
 		tglBtnDonut.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnDonut = new GridBagConstraints();
 		gbc_tglBtnDonut.insets = new Insets(0, 0, 5, 0);
-		gbc_tglBtnDonut.gridx = 12;
+		gbc_tglBtnDonut.gridx = 13;
 		gbc_tglBtnDonut.gridy = 0;
 		pnlBtns.add(tglBtnDonut, gbc_tglBtnDonut);
 		tglBtnDonut.setPreferredSize(new Dimension(100, 50));
+		
+		JLabel lblOptions = new JLabel("Options");
+		GridBagConstraints gbc_lblOptions = new GridBagConstraints();
+		gbc_lblOptions.anchor = GridBagConstraints.WEST;
+		gbc_lblOptions.insets = new Insets(0, 0, 5, 5);
+		gbc_lblOptions.gridx = 0;
+		gbc_lblOptions.gridy = 1;
+		pnlBtns.add(lblOptions, gbc_lblOptions);
 
 		JToggleButton tglBtnSelect = new JToggleButton("Select");
 		tglBtnSelect.setBackground(Color.GRAY);
@@ -127,7 +147,7 @@ public class Paint extends JFrame {
 		GridBagConstraints gbc_tglBtnSelect = new GridBagConstraints();
 		gbc_tglBtnSelect.anchor = GridBagConstraints.NORTH;
 		gbc_tglBtnSelect.insets = new Insets(0, 0, 5, 5);
-		gbc_tglBtnSelect.gridx = 3;
+		gbc_tglBtnSelect.gridx = 4;
 		gbc_tglBtnSelect.gridy = 1;
 		pnlBtns.add(tglBtnSelect, gbc_tglBtnSelect);
 		tglBtnSelect.setPreferredSize(new Dimension(110, 30));
@@ -137,7 +157,7 @@ public class Paint extends JFrame {
 		buttonGroup.add(tglBtnDelete);
 		GridBagConstraints gbc_tglBtnDelete = new GridBagConstraints();
 		gbc_tglBtnDelete.insets = new Insets(0, 0, 5, 5);
-		gbc_tglBtnDelete.gridx = 6;
+		gbc_tglBtnDelete.gridx = 7;
 		gbc_tglBtnDelete.gridy = 1;
 		pnlBtns.add(tglBtnDelete, gbc_tglBtnDelete);
 		tglBtnDelete.setPreferredSize(new Dimension(110, 30));
@@ -147,7 +167,7 @@ public class Paint extends JFrame {
 		buttonGroup.add(tglBtnEdit);
 		GridBagConstraints gbc_tglBtnEdit = new GridBagConstraints();
 		gbc_tglBtnEdit.insets = new Insets(0, 0, 5, 5);
-		gbc_tglBtnEdit.gridx = 9;
+		gbc_tglBtnEdit.gridx = 10;
 		gbc_tglBtnEdit.gridy = 1;
 		pnlBtns.add(tglBtnEdit, gbc_tglBtnEdit);
 		tglBtnEdit.setPreferredSize(new Dimension(110, 30));
