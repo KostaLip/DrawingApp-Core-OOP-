@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class dlgCircle extends JDialog {
+public class DlgCircle extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -27,7 +27,7 @@ public class dlgCircle extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			dlgCircle dialog = new dlgCircle();
+			DlgCircle dialog = new DlgCircle();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -38,7 +38,7 @@ public class dlgCircle extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public dlgCircle() {
+	public DlgCircle() {
 		setTitle("EDIT CIRCLE");
 		setModal(true);
 		setBounds(100, 100, 450, 300);

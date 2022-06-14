@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class dlgPoint extends JDialog {
+public class DlgPoint extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -29,7 +29,7 @@ public class dlgPoint extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			dlgPoint dialog = new dlgPoint();
+			DlgPoint dialog = new DlgPoint();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -40,7 +40,7 @@ public class dlgPoint extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public dlgPoint() {
+	public DlgPoint() {
 		setTitle("EDIT POINT");
 		setModal(true);
 		setBounds(100, 100, 450, 300);

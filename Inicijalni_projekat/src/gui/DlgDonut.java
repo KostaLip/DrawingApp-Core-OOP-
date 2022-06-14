@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class dlgDonut extends JDialog {
+public class DlgDonut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -27,7 +27,7 @@ public class dlgDonut extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			dlgDonut dialog = new dlgDonut();
+			DlgDonut dialog = new DlgDonut();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -38,7 +38,7 @@ public class dlgDonut extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public dlgDonut() {
+	public DlgDonut() {
 		setModal(true);
 		setTitle("EDIT DONUT");
 		setBounds(100, 100, 450, 300);

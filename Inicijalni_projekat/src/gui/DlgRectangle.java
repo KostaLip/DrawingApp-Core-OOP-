@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class dlgRectangle extends JDialog {
+public class DlgRectangle extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -27,7 +27,7 @@ public class dlgRectangle extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			dlgRectangle dialog = new dlgRectangle();
+			DlgRectangle dialog = new DlgRectangle();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -38,7 +38,7 @@ public class dlgRectangle extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public dlgRectangle() {
+	public DlgRectangle() {
 		setTitle("EDIT RECTANGLE");
 		setModal(true);
 		setBounds(100, 100, 450, 300);

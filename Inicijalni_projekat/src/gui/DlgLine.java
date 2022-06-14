@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class dlgLine extends JDialog {
+public class DlgLine extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -27,7 +27,7 @@ public class dlgLine extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			dlgLine dialog = new dlgLine();
+			DlgLine dialog = new DlgLine();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -38,7 +38,7 @@ public class dlgLine extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public dlgLine() {
+	public DlgLine() {
 		setTitle("EDIT LINE");
 		setModal(true);
 		setBounds(100, 100, 450, 300);

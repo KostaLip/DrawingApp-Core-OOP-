@@ -18,6 +18,7 @@ import javax.swing.JToggleButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
@@ -36,7 +37,6 @@ public class Paint extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	Border blackline = BorderFactory.createLineBorder(Color.black);
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
-	public Drawing panel = new Drawing(this);
 
 	/**
 	 * Launch the application.
@@ -56,6 +56,8 @@ public class Paint extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @return
 	 */
 	public Paint() {
 		setTitle("Paint");
@@ -89,11 +91,10 @@ public class Paint extends JFrame {
 		JToggleButton tglBtnPoint = new JToggleButton("Point");
 		tglBtnPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dlgPoint dlgP = new dlgPoint();
+				DlgPoint dlgP = new DlgPoint();
 				dlgP.setVisible(true);
 			}
 		});
-		tglBtnPoint.setSelected(true);
 		buttonGroup.add(tglBtnPoint);
 		tglBtnPoint.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnPoint = new GridBagConstraints();
@@ -105,8 +106,8 @@ public class Paint extends JFrame {
 
 		JToggleButton tglBtnLine = new JToggleButton("Line");
 		tglBtnLine.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dlgLine dlgL = new dlgLine();
+			public void actionPerformed(ActionEvent arg0) {
+				DlgLine dlgL=new DlgLine();
 				dlgL.setVisible(true);
 			}
 		});
@@ -122,7 +123,7 @@ public class Paint extends JFrame {
 		JToggleButton tglBtnRectangle = new JToggleButton("Rectangle");
 		tglBtnRectangle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dlgRectangle dlgR = new dlgRectangle();
+				DlgRectangle dlgR = new DlgRectangle();
 				dlgR.setVisible(true);
 			}
 		});
@@ -138,7 +139,7 @@ public class Paint extends JFrame {
 		JToggleButton tglBtnCircle = new JToggleButton("Circle");
 		tglBtnCircle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dlgCircle dlgC = new dlgCircle();
+				DlgCircle dlgC = new DlgCircle();
 				dlgC.setVisible(true);
 			}
 		});
@@ -154,7 +155,7 @@ public class Paint extends JFrame {
 		JToggleButton tglBtnDonut = new JToggleButton("Donut");
 		tglBtnDonut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dlgDonut dlgD = new dlgDonut();
+				DlgDonut dlgD = new DlgDonut();
 				dlgD.setVisible(true);
 			}
 		});
@@ -207,8 +208,7 @@ public class Paint extends JFrame {
 		tglBtnEdit.setPreferredSize(new Dimension(110, 30));
 
 		JPanel drawingPanel = new JPanel();
-		contentPane.add(drawingPanel, BorderLayout.CENTER);
+		contentPane.add(new Drawing(), BorderLayout.CENTER);
 		drawingPanel.setBorder(blackline);
 	}
-
 }
