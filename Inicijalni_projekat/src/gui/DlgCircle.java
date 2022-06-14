@@ -111,6 +111,7 @@ public class DlgCircle extends JDialog {
 		}
 		{
 			JButton btnColor = new JButton("CHOSE COLOR");
+			btnColor.setBackground(Color.RED);
 			btnColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Color initialColor = Color.BLACK;
