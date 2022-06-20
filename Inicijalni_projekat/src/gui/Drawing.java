@@ -25,24 +25,44 @@ import gui.Paint;
 public class Drawing extends JPanel {
 	
 	private ArrayList<Shape>shapes=new ArrayList<Shape>();
+	int br;
+	private Shape selectedShape;
 
 	public Drawing() {
-			addMouseListener(new MouseAdapter() {
-				public void mousePressed(MouseEvent e) {
-					Point p=new Point(e.getX(),e.getY());
-					Circle c=new Circle(p,12);
-					shapes.add(c);
-					repaint();
-				}
-			});
+			setBackground(Color.WHITE);
 	}
 	
 	public void paint(Graphics g) {
+		super.paint(g);
 		Iterator<Shape>it=shapes.iterator();
 		while(it.hasNext()) {
 			Shape sh=it.next();
 			sh.draw(g);
 		}
 	}
+	
+	public void addShape(Shape sh) {
+		shapes.add(sh);
+		repaint();
+	}
 
+	public ArrayList<Shape> getShapes(){
+		return shapes;
+	}
+	
+	public void select(int x,int y) {
+		for (br = shapes.size()-1; br >= 0; br--) {
+			shapes.get(br).setSelected(false);
+			repaint();
+			if (shapes.get(br).contains(x, y)) {
+				shapes.get(br).setSelected(true);
+				repaint();
+				return;
+			}
+		}
+	}
+	
+	public Shape getSelectedShape() {
+		return selectedShape;
+	}
 }
