@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import geometry.Rectangle;
+import java.awt.Color;
 
 public class FrameSort extends JFrame {
 
@@ -50,11 +51,13 @@ public class FrameSort extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.PINK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
 		JPanel pnlCenter = new JPanel();
+		pnlCenter.setBackground(Color.PINK);
 		contentPane.add(pnlCenter, BorderLayout.CENTER);
 		JScrollPane scrlPaneSort = new JScrollPane();
 

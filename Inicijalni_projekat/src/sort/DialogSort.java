@@ -10,12 +10,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import geometry.Point;
 import geometry.Rectangle;
+import java.awt.Color;
 
 public class DialogSort extends JDialog {
 
@@ -45,10 +47,12 @@ public class DialogSort extends JDialog {
 	 * Create the dialog.
 	 */
 	public DialogSort() {
+		setTitle("ADD RECTANGLE");
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.PINK);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -70,7 +74,7 @@ public class DialogSort extends JDialog {
 				.addGroup(glContentPanel.createSequentialGroup().addContainerGap()
 						.addGroup(glContentPanel.createParallelGroup(Alignment.LEADING).addComponent(lblXCoordinate)
 								.addComponent(lblYCoordinate).addComponent(lblWidth).addComponent(lblHeight))
-						.addGap(32)
+						.addGap(30)
 						.addGroup(glContentPanel.createParallelGroup(Alignment.LEADING)
 								.addComponent(txtX, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
@@ -80,23 +84,23 @@ public class DialogSort extends JDialog {
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(txtHeight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(64, Short.MAX_VALUE)));
+						.addContainerGap(60, Short.MAX_VALUE)));
 		glContentPanel.setVerticalGroup(glContentPanel.createParallelGroup(Alignment.LEADING).addGroup(glContentPanel
 				.createSequentialGroup().addContainerGap()
 				.addGroup(glContentPanel
 						.createParallelGroup(Alignment.BASELINE).addComponent(lblXCoordinate).addComponent(txtX,
 								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(18)
+				.addGap(20)
 				.addGroup(glContentPanel
 						.createParallelGroup(Alignment.BASELINE).addComponent(lblYCoordinate).addComponent(txtY,
 								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(18)
+				.addGap(20)
 				.addGroup(glContentPanel.createParallelGroup(Alignment.BASELINE).addComponent(lblWidth).addComponent(
 						txtWidth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(18)
+				.addGap(20)
 				.addGroup(glContentPanel.createParallelGroup(Alignment.BASELINE).addComponent(lblHeight).addComponent(
 						txtHeight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(82, Short.MAX_VALUE)));
+				.addContainerGap(80, Short.MAX_VALUE)));
 
 		contentPanel.setLayout(glContentPanel);
 		{
@@ -106,13 +110,53 @@ public class DialogSort extends JDialog {
 				btnOk = new JButton("ADD");
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						int x = Integer.parseInt(txtX.getText());
-						int y = Integer.parseInt(txtY.getText());
-						int width = Integer.parseInt(txtWidth.getText());
-						int height = Integer.parseInt(txtHeight.getText());
-						rectangle = new Rectangle(new Point(x, y), height, width);
-						dispose();
-
+						if (txtX.getText().isEmpty() || txtY.getText().isEmpty() || txtWidth.getText().isEmpty()
+								|| txtHeight.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if(!isNumeric(txtX.getText())) {
+							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						else if(!isNumeric(txtY.getText())) {
+							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						else if(!isNumeric(txtWidth.getText())) {
+							JOptionPane.showMessageDialog(null, "Sirina mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						else if(!isNumeric(txtHeight.getText())) {
+							JOptionPane.showMessageDialog(null, "Visina mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						else if (isNumeric(txtX.getText()) && isNumeric(txtY.getText())
+								&& isNumeric(txtWidth.getText()) && isNumeric(txtHeight.getText())) {
+							int x=Integer.parseInt(txtX.getText());
+							int y = Integer.parseInt(txtY.getText());
+							int width=Integer.parseInt(txtWidth.getText());
+							int height=Integer.parseInt(txtHeight.getText());
+							if(x<0){
+								JOptionPane.showMessageDialog(null, "X koordinata mora biti veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							}
+							else if(y<0) {
+								JOptionPane.showMessageDialog(null, "Y koordinata mora biti veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							}
+							else if(width<=0) {
+								JOptionPane.showMessageDialog(null, "Sirina mora biti strogo veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							}
+							else if(height<=0) {
+								JOptionPane.showMessageDialog(null, "Visina mora biti strogo veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							}
+							else {
+								rectangle=new Rectangle(new Point(x,y),width,height);
+								dispose();
+							}
+						} 
 					}
 				});
 				btnOk.setActionCommand("OK");
@@ -148,6 +192,19 @@ public class DialogSort extends JDialog {
 		txtY.setText("" + r.getUpperLeftPoint().getY());
 		txtWidth.setText("" + r.getWidth());
 		txtHeight.setText("" + r.getHeight());
+	}
+
+	private static boolean isNumeric(String str) {
+		int number;
+		if (str == null || str == "") {
+			return false;
+		}
+		try {
+			number = Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 }
