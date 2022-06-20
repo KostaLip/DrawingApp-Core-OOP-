@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
@@ -76,11 +77,39 @@ public class FrameSort extends JFrame {
 		JButton addBtn = new JButton("ADD");
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					DialogSort dlgSort= new DialogSort();
-				
+				DialogSort dlgSort = new DialogSort();
+				dlgSort.setVisible(true);
+				if (dlgSort.getRectangle() != null) {
+					arrLst.add(dlgSort.getRectangle());
+				}
+				arrLst.sort(null);
+				sortLst.setModel(sort());
 			}
 		});
+		JButton btnClose = new JButton("CLOSE");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
 
+			}
+		});
+		GroupLayout glPnlSouth = new GroupLayout(pnlSouth);
+		glPnlSouth.setHorizontalGroup(
+				glPnlSouth.createParallelGroup(Alignment.LEADING).addGroup(glPnlSouth.createSequentialGroup().addGap(46)
+						.addComponent(addBtn).addGap(54).addComponent(btnClose).addContainerGap(61, Short.MAX_VALUE)));
+		glPnlSouth.setVerticalGroup(glPnlSouth.createParallelGroup(Alignment.TRAILING)
+				.addGroup(glPnlSouth.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(glPnlSouth.createParallelGroup(Alignment.BASELINE).addComponent(addBtn)
+								.addComponent(btnClose))));
+		pnlSouth.setLayout(glPnlSouth);
 	}
 
+	private DefaultListModel<Rectangle> sort() {
+		Iterator<Rectangle> it = arrLst.iterator();
+		DefaultListModel<Rectangle>dlm=new DefaultListModel<Rectangle>();
+		while(it.hasNext()) {
+			dlm.addElement(it.next());
+		}
+		return dlm;
+	}
 }
