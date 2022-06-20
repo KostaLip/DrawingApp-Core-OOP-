@@ -29,6 +29,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -169,6 +171,14 @@ public class Paint extends JFrame {
 		gbc_tglBtnDelete.gridy = 1;
 		pnlBtns.add(tglBtnDelete, gbc_tglBtnDelete);
 		tglBtnDelete.setPreferredSize(new Dimension(110, 30));
+		tglBtnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(drawingPanel.isShapesEmpty()) {
+					JOptionPane.showMessageDialog(null, "NEMA NACRTANIH OBLIKA", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 
 		tglBtnEdit.setBackground(Color.GRAY);
 		buttonGroup.add(tglBtnEdit);

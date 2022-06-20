@@ -65,4 +65,8 @@ public class Drawing extends JPanel {
 	public Shape getSelectedShape() {
 		return selectedShape;
 	}
+	
+	public boolean isShapesEmpty() {
+		return shapes.isEmpty();
+	}
 }
