@@ -1,4 +1,4 @@
-package sort;
+package stack;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -29,7 +29,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
 
-public class DialogSort extends JDialog {
+public class DialogStack extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JButton btnOk;
@@ -45,7 +45,7 @@ public class DialogSort extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			DialogSort dialog = new DialogSort();
+			DialogStack dialog = new DialogStack();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -53,7 +53,7 @@ public class DialogSort extends JDialog {
 		}
 	}
 
-	public DialogSort() {
+	public DialogStack() {
 		setTitle("ADD RECTANGLE");
 		setModal(true);
 		setResizable(false);
@@ -195,9 +195,9 @@ public class DialogSort extends JDialog {
 			GroupLayout glBtnPane = new GroupLayout(btnPane);
 			glBtnPane.setHorizontalGroup(
 					glBtnPane.createParallelGroup(Alignment.LEADING).addGroup(glBtnPane.createSequentialGroup()
-							.addGap(40).addComponent(btnOk).addGap(60).addComponent(btnCancel).addGap(60)));
+							.addGap(42).addComponent(btnOk).addGap(69).addComponent(btnCancel).addGap(68)));
 			glBtnPane.setVerticalGroup(glBtnPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(glBtnPane.createSequentialGroup().addGap(10)
+					.addGroup(glBtnPane.createSequentialGroup().addGap(11)
 							.addGroup(glBtnPane.createParallelGroup(Alignment.BASELINE).addComponent(btnOk)
 									.addComponent(btnCancel))));
 			btnPane.setLayout(glBtnPane);
