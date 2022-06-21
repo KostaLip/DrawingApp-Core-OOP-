@@ -164,6 +164,19 @@ public class Paint extends JFrame {
 		tglBtnSelect.setPreferredSize(new Dimension(110, 30));
 
 		JToggleButton tglBtnDelete = new JToggleButton("Delete");
+		tglBtnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(drawingPanel.getSelectedShape()==null) {
+					JOptionPane.showMessageDialog(null, "NEMA SELEKTOVANIH OBLIKA", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					drawingPanel.getShapes().remove(drawingPanel.getSelectedShape());
+					repaint();
+					drawingPanel.setSelectedShape();
+				}
+			} 
+		});
 		tglBtnDelete.setBackground(Color.GRAY);
 		buttonGroup.add(tglBtnDelete);
 		GridBagConstraints gbc_tglBtnDelete = new GridBagConstraints();
