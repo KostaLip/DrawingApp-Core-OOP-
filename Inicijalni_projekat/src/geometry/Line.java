@@ -93,7 +93,7 @@ public class Line extends Shape {
 	public void setEndPoint(Point endPoint) {
 		this.endPoint = endPoint;
 	}
-	
+
 	public String toString() {
 		return startPoint + "-- >" + endPoint;
 	}

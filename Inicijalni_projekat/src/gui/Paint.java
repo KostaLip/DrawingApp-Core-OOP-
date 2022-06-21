@@ -282,7 +282,7 @@ public class Paint extends JFrame {
 					drawingPanel.addShape(clickPoint);
 				} else if (tglBtnLine.isSelected()) {
 					Point startPoint = new Point(e.getX(), e.getY());
-					Point endPoint = new Point(e.getX(), e.getY());
+					Point endPoint = new Point(e.getX() - 60, e.getY() - 60);
 					Line line = new Line(startPoint, endPoint);
 					repaint();
 					drawingPanel.addShape(line);

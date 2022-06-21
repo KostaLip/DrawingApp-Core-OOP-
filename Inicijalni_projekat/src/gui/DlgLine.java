@@ -166,7 +166,7 @@ public class DlgLine extends JDialog {
 			}
 		}
 	}
-	
+
 	public Color getColor() {
 		return this.boja;
 	}

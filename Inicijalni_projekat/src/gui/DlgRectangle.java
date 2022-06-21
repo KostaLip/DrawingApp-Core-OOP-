@@ -251,7 +251,7 @@ public class DlgRectangle extends JDialog {
 			return false;
 		}
 	}
-	
+
 	public Color getColor() {
 		return this.boja;
 	}

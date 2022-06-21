@@ -197,9 +197,8 @@ public class DialogSort extends JDialog {
 					glBtnPane.createParallelGroup(Alignment.LEADING).addGroup(glBtnPane.createSequentialGroup()
 							.addGap(40).addComponent(btnOk).addGap(60).addComponent(btnCancel).addGap(60)));
 			glBtnPane.setVerticalGroup(glBtnPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(glBtnPane.createSequentialGroup().addGap(10)
-							.addGroup(glBtnPane.createParallelGroup(Alignment.BASELINE).addComponent(btnOk)
-									.addComponent(btnCancel))));
+					.addGroup(glBtnPane.createSequentialGroup().addGap(10).addGroup(glBtnPane
+							.createParallelGroup(Alignment.BASELINE).addComponent(btnOk).addComponent(btnCancel))));
 			btnPane.setLayout(glBtnPane);
 		}
 	}

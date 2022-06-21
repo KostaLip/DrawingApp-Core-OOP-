@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public abstract class Shape implements Moveble, Comparable {
 	private boolean selected;
-	private Color color=Color.BLACK;
+	private Color color = Color.BLACK;
 
 	public Shape() {
 
@@ -26,7 +26,7 @@ public abstract class Shape implements Moveble, Comparable {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-	
+
 	public Color getColor() {
 		return color;
 	}
