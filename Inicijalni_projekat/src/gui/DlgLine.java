@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 public class DlgLine extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	Color boja;
 
 	/**
 	 * Launch the application.
@@ -164,6 +165,10 @@ public class DlgLine extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	
+	public Color getColor() {
+		return this.boja;
 	}
 
 }

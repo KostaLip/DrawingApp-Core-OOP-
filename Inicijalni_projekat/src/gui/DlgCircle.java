@@ -30,7 +30,10 @@ public class DlgCircle extends JDialog {
 	JTextArea txtCenterX = new JTextArea();
 	JTextArea txtCenterY = new JTextArea();
 	JTextArea txtRadius = new JTextArea();
-	Circle krug=null;
+	Circle krug = null;
+	Color boja;
+	private boolean colorChanged;
+	JButton btnColor = new JButton("CHOSE COLOR");
 
 	/**
 	 * Launch the application.
@@ -117,13 +120,13 @@ public class DlgCircle extends JDialog {
 			txtRadius.setLineWrap(true);
 		}
 		{
-			JButton btnColor = new JButton("CHOSE COLOR");
 			btnColor.setBackground(Color.RED);
 			btnColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Color initialColor = Color.BLACK;
 					Color color = JColorChooser.showDialog(null, "Select a color", initialColor);
 					btnColor.setBackground(color);
+					colorChanged = true;
 				}
 			});
 			GridBagConstraints gbc_btnColor = new GridBagConstraints();
@@ -166,10 +169,13 @@ public class DlgCircle extends JDialog {
 							} else if (radius <= 0) {
 								JOptionPane.showMessageDialog(null, "Poluprecnik mora biti strogo veci od 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
-							}
-							else {
-								Point center=new Point(x,y);
-								krug=new Circle(center,radius);
+							} else {
+								Point center = new Point(x, y);
+								krug = new Circle(center, radius);
+								if (colorChanged) {
+									boja = btnColor.getBackground();
+									krug.setColor(boja);
+								}
 								dispose();
 							}
 						}
@@ -204,7 +210,11 @@ public class DlgCircle extends JDialog {
 			return false;
 		}
 	}
-	
+
+	public Color getColor() {
+		return this.boja;
+	}
+
 	public Circle getCircle() {
 		return krug;
 	}

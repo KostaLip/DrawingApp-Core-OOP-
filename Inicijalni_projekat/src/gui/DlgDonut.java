@@ -32,7 +32,10 @@ public class DlgDonut extends JDialog {
 	JTextArea txtCentarY = new JTextArea();
 	JTextArea txtRadius = new JTextArea();
 	JTextArea txtInnerRadius = new JTextArea();
-	Donut kifla=null;
+	Donut kifla = null;
+	Color boja;
+	JButton btnColor = new JButton("CHOSE COLOR");
+	private boolean colorChanged;
 
 	/**
 	 * Launch the application.
@@ -137,13 +140,13 @@ public class DlgDonut extends JDialog {
 			txtInnerRadius.setLineWrap(true);
 		}
 		{
-			JButton btnColor = new JButton("CHOSE COLOR");
 			btnColor.setBackground(Color.RED);
 			btnColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Color initialColor = Color.BLACK;
 					Color color = JColorChooser.showDialog(null, "Select a color", initialColor);
 					btnColor.setBackground(color);
+					colorChanged = true;
 				}
 			});
 			GridBagConstraints gbc_btnColor = new GridBagConstraints();
@@ -200,6 +203,10 @@ public class DlgDonut extends JDialog {
 							} else {
 								Point center = new Point(x, y);
 								kifla = new Donut(center, radius, innerRadius);
+								if (colorChanged) {
+									boja = btnColor.getBackground();
+									kifla.setColor(boja);
+								}
 								dispose();
 							}
 						}
@@ -233,6 +240,10 @@ public class DlgDonut extends JDialog {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+
+	public Color getColor() {
+		return this.boja;
 	}
 
 	public Donut getDonut() {

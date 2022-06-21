@@ -215,9 +215,8 @@ public class DlgRectangle extends JDialog {
 								rec = new Rectangle(upperL, width, height);
 								if (colorChanged) {
 									boja = btnColor.getBackground();
-									rec = new Rectangle(upperL, width, height, boja);
+									rec.setColor(boja);
 								}
-								boja = Color.BLACK;
 								dispose();
 							}
 						}
@@ -251,6 +250,10 @@ public class DlgRectangle extends JDialog {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+	
+	public Color getColor() {
+		return this.boja;
 	}
 
 	public Rectangle getRectangle() {

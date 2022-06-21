@@ -64,6 +64,7 @@ public class Circle extends Shape {
 	}
 
 	public void draw(Graphics g) {
+		g.setColor(super.getColor());
 		g.drawOval(center.getX() - radius, center.getY() - radius, 2 * radius, 2 * radius);
 
 		if (isSelected()) {

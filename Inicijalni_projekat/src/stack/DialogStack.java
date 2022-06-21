@@ -197,9 +197,8 @@ public class DialogStack extends JDialog {
 					glBtnPane.createParallelGroup(Alignment.LEADING).addGroup(glBtnPane.createSequentialGroup()
 							.addGap(42).addComponent(btnOk).addGap(69).addComponent(btnCancel).addGap(68)));
 			glBtnPane.setVerticalGroup(glBtnPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(glBtnPane.createSequentialGroup().addGap(11)
-							.addGroup(glBtnPane.createParallelGroup(Alignment.BASELINE).addComponent(btnOk)
-									.addComponent(btnCancel))));
+					.addGroup(glBtnPane.createSequentialGroup().addGap(11).addGroup(glBtnPane
+							.createParallelGroup(Alignment.BASELINE).addComponent(btnOk).addComponent(btnCancel))));
 			btnPane.setLayout(glBtnPane);
 		}
 	}

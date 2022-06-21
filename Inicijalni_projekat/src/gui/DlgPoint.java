@@ -30,7 +30,10 @@ public class DlgPoint extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	JTextArea txtX = new JTextArea();
 	JTextArea txtY = new JTextArea();
-	Point tacka= null;
+	Point tacka = null;
+	Color boja;
+	private boolean colorChanged;
+	JButton btnColor = new JButton("CHOSE COLOR");
 
 	/**
 	 * Launch the application.
@@ -101,13 +104,13 @@ public class DlgPoint extends JDialog {
 				txtY.setLineWrap(true);
 			}
 		}
-		JButton btnColor = new JButton("CHOSE COLOR");
 		btnColor.setBackground(Color.RED);
 		btnColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Color initialColor = Color.BLACK;
 				Color color = JColorChooser.showDialog(null, "Select a color", initialColor);
 				btnColor.setBackground(color);
+				colorChanged = true;
 			}
 		});
 		GridBagConstraints gbc_btnColor = new GridBagConstraints();
@@ -122,31 +125,30 @@ public class DlgPoint extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(txtX.getText().isEmpty()||txtY.getText().isEmpty()) {
+						if (txtX.getText().isEmpty() || txtY.getText().isEmpty()) {
 							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
-						}
-						else if(!isNumeric(txtX.getText())) {
+						} else if (!isNumeric(txtX.getText())) {
 							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
-						}
-						else if(!isNumeric(txtY.getText())) {
+						} else if (!isNumeric(txtY.getText())) {
 							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
-						}
-						else if(isNumeric(txtX.getText())&&isNumeric(txtY.getText())) {
+						} else if (isNumeric(txtX.getText()) && isNumeric(txtY.getText())) {
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
-							if(x<0) {
+							if (x < 0) {
 								JOptionPane.showMessageDialog(null, "X osa mora biti veca od 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
-							}
-							else if(y<0) {
+							} else if (y < 0) {
 								JOptionPane.showMessageDialog(null, "Y osa mora biti veca od 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
-							}
-							else {
-								tacka=new Point(x,y);
+							} else {
+								tacka = new Point(x, y);
+								if (colorChanged) {
+									boja = btnColor.getBackground();
+									tacka.setColor(boja);
+								}
 								dispose();
 							}
 						}
@@ -181,7 +183,11 @@ public class DlgPoint extends JDialog {
 			return false;
 		}
 	}
-	
+
+	public Color getColor() {
+		return this.boja;
+	}
+
 	public Point getPoint() {
 		return this.tacka;
 	}

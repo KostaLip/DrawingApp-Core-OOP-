@@ -7,7 +7,6 @@ public class Rectangle extends Shape {
 	private Point upperLeftPoint;
 	private int width;
 	private int height;
-	private Color boja;
 	public Rectangle() {
 	}
 
@@ -21,13 +20,6 @@ public class Rectangle extends Shape {
 
 		this(upperLeftPoint, width, height);
 		setSelected(selected);
-	}
-	
-	public Rectangle(Point upperLeftPoint,int width,int height,Color boja) {
-		this.upperLeftPoint = upperLeftPoint;
-		this.width = width;
-		this.height = height;
-		this.boja=boja;
 	}
 
 	public boolean equals(Object obj) {
@@ -43,7 +35,7 @@ public class Rectangle extends Shape {
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(boja);
+		g.setColor(super.getColor());
 		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height);
 
 		if (isSelected()) {
@@ -52,7 +44,6 @@ public class Rectangle extends Shape {
 			g.drawRect(upperLeftPoint.getX() + width - 2, upperLeftPoint.getY() - 2, 4, 4);
 			g.drawRect(upperLeftPoint.getX() - 2, upperLeftPoint.getY() + height - 2, 4, 4);
 			g.drawRect(upperLeftPoint.getX() + width - 2, upperLeftPoint.getY() + height - 2, 4, 4);
-			g.setColor(Color.black);
 		}
 
 	}
