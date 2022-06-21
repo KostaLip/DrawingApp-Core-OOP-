@@ -11,8 +11,13 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Point;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
@@ -23,6 +28,9 @@ import java.awt.event.ActionEvent;
 public class DlgPoint extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	JTextArea txtX = new JTextArea();
+	JTextArea txtY = new JTextArea();
+	Point tacka= null;
 
 	/**
 	 * Launch the application.
@@ -62,7 +70,6 @@ public class DlgPoint extends JDialog {
 			contentPanel.add(lblX, gbc_lblX);
 		}
 		{
-			JTextArea txtX = new JTextArea();
 			GridBagConstraints gbc_txtX = new GridBagConstraints();
 			gbc_txtX.insets = new Insets(0, 0, 5, 0);
 			gbc_txtX.fill = GridBagConstraints.BOTH;
@@ -83,7 +90,6 @@ public class DlgPoint extends JDialog {
 		}
 		{
 			{
-				JTextArea txtY = new JTextArea();
 				GridBagConstraints gbc_txtY = new GridBagConstraints();
 				gbc_txtY.insets = new Insets(0, 0, 5, 0);
 				gbc_txtY.fill = GridBagConstraints.BOTH;
@@ -114,6 +120,38 @@ public class DlgPoint extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(txtX.getText().isEmpty()||txtY.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						else if(!isNumeric(txtX.getText())) {
+							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						else if(!isNumeric(txtY.getText())) {
+							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						else if(isNumeric(txtX.getText())&&isNumeric(txtY.getText())) {
+							int x = Integer.parseInt(txtX.getText());
+							int y = Integer.parseInt(txtY.getText());
+							if(x<0) {
+								JOptionPane.showMessageDialog(null, "X osa mora biti veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							}
+							else if(y<0) {
+								JOptionPane.showMessageDialog(null, "Y osa mora biti veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							}
+							else {
+								tacka=new Point(x,y);
+								dispose();
+							}
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -129,6 +167,23 @@ public class DlgPoint extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	private static boolean isNumeric(String str) {
+		int number;
+		if (str == null || str == "") {
+			return false;
+		}
+		try {
+			number = Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+	
+	public Point getPoint() {
+		return this.tacka;
 	}
 
 }

@@ -10,6 +10,8 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import gui.Drawing;
+import geometry.Circle;
+import geometry.Donut;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
@@ -37,11 +39,11 @@ import java.awt.event.ActionEvent;
 
 public class Paint extends JFrame {
 
-	private JPanel contentPane=new JPanel();
+	private JPanel contentPane = new JPanel();
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	Border blackline = BorderFactory.createLineBorder(Color.black);
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
-	private Drawing drawingPanel= new Drawing();
+	private Drawing drawingPanel = new Drawing();
 	JToggleButton tglBtnPoint = new JToggleButton("Point");
 	JToggleButton tglBtnLine = new JToggleButton("Line");
 	JToggleButton tglBtnRectangle = new JToggleButton("Rectangle");
@@ -108,7 +110,7 @@ public class Paint extends JFrame {
 		gbc_tglBtnPoint.gridy = 0;
 		pnlBtns.add(tglBtnPoint, gbc_tglBtnPoint);
 		tglBtnPoint.setPreferredSize(new Dimension(100, 50));
-		
+
 		buttonGroup.add(tglBtnLine);
 		tglBtnLine.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnLine = new GridBagConstraints();
@@ -166,16 +168,16 @@ public class Paint extends JFrame {
 		JToggleButton tglBtnDelete = new JToggleButton("Delete");
 		tglBtnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(drawingPanel.getSelectedShape()==null) {
-					JOptionPane.showMessageDialog(null, "NEMA SELEKTOVANIH OBLIKA", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
-				}
-				else {
+				if (drawingPanel.isShapesEmpty()) {
+					JOptionPane.showMessageDialog(null, "NEMA NACRTANIH OBLIKA", "ERROR", JOptionPane.ERROR_MESSAGE);
+				} else if (drawingPanel.getSelectedShape() == null) {
+					JOptionPane.showMessageDialog(null, "NEMA SELEKTOVANIH OBLIKA", "ERROR", JOptionPane.ERROR_MESSAGE);
+				} else {
 					drawingPanel.getShapes().remove(drawingPanel.getSelectedShape());
 					repaint();
 					drawingPanel.setSelectedShape();
 				}
-			} 
+			}
 		});
 		tglBtnDelete.setBackground(Color.GRAY);
 		buttonGroup.add(tglBtnDelete);
@@ -187,9 +189,73 @@ public class Paint extends JFrame {
 		tglBtnDelete.setPreferredSize(new Dimension(110, 30));
 		tglBtnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(drawingPanel.isShapesEmpty()) {
-					JOptionPane.showMessageDialog(null, "NEMA NACRTANIH OBLIKA", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
+				if (drawingPanel.isShapesEmpty()) {
+					JOptionPane.showMessageDialog(null, "NEMA NACRTANIH OBLIKA", "ERROR", JOptionPane.ERROR_MESSAGE);
+				} else if (drawingPanel.getSelectedShape() == null) {
+					JOptionPane.showMessageDialog(null, "NEMA SELEKTOVANIH OBLIKA", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					if(drawingPanel.getSelectedShape() instanceof Point) {
+						Point p = (Point) drawingPanel.getSelectedShape();
+						DlgPoint dlgPoint=new DlgPoint();
+						dlgPoint.txtX.setText(Integer.toString(p.getX()));
+						dlgPoint.txtY.setText(Integer.toString(p.getY()));
+						dlgPoint.setVisible(true);
+						if(dlgPoint.getPoint()!=null) {
+							p.setX(dlgPoint.getPoint().getX());
+							p.setY(dlgPoint.getPoint().getY());
+							repaint();
+						}
+					}
+					else if(drawingPanel.getSelectedShape() instanceof Rectangle) {
+						Rectangle r = (Rectangle) drawingPanel.getSelectedShape();
+						DlgRectangle dlgRectangle=new DlgRectangle();
+						dlgRectangle.txtUpperX.setText(Integer.toString(r.getUpperLeftPoint().getX()));
+						dlgRectangle.txtUpperY.setText(Integer.toString(r.getUpperLeftPoint().getY()));
+						dlgRectangle.txtWidth.setText(Integer.toString(r.getWidth()));
+						dlgRectangle.txtHeight.setText(Integer.toString(r.getHeight()));
+						dlgRectangle.setVisible(true);
+						if(dlgRectangle.getRectangle()!=null) {
+							Rectangle r2=dlgRectangle.getRectangle();
+							Point p = new Point(r2.getUpperLeftPoint().getX(),r2.getUpperLeftPoint().getY());
+							r.setUpperLeftPoint(p);
+							r.setWidth(r2.getWidth());
+							r.setHeight(r2.getHeight());
+							repaint();
+						}
+					}
+					else if(drawingPanel.getSelectedShape() instanceof Donut) {
+						Donut d=(Donut) drawingPanel.getSelectedShape();
+						DlgDonut dlgDonut=new DlgDonut();
+						dlgDonut.txtCentarX.setText(Integer.toString(d.getCenter().getX()));
+						dlgDonut.txtCentarY.setText(Integer.toString(d.getCenter().getY()));
+						dlgDonut.txtRadius.setText(Integer.toString(d.getRadius()));
+						dlgDonut.txtInnerRadius.setText(Integer.toString(d.getInnerRadius()));
+						dlgDonut.setVisible(true);
+						if(dlgDonut.getDonut()!=null) {
+							Donut d2=dlgDonut.getDonut();
+							Point p2=new Point(d2.getCenter().getX(),d2.getCenter().getY());
+							d.setCenter(p2);
+							d.setRadius(d2.getRadius());
+							d.setInnerRadius(d2.getInnerRadius());
+							repaint();
+						}
+					}
+					else if(drawingPanel.getSelectedShape() instanceof Circle) {
+						Circle c=(Circle) drawingPanel.getSelectedShape();
+						DlgCircle dlgCircle=new DlgCircle();
+						dlgCircle.txtCenterX.setText(Integer.toString(c.getCenter().getX()));
+						dlgCircle.txtCenterY.setText(Integer.toString(c.getCenter().getY()));
+						dlgCircle.txtRadius.setText(Integer.toString(c.getRadius()));
+						dlgCircle.setVisible(true);
+						if(dlgCircle.getCircle()!=null) {
+							Circle c2=dlgCircle.getCircle();
+							Point p1= new Point(c2.getCenter().getX(),c2.getCenter().getY());
+							c.setCenter(p1);
+							c.setRadius(c2.getRadius());
+							repaint();
+						}
+					}
 				}
 			}
 		});
@@ -207,50 +273,46 @@ public class Paint extends JFrame {
 		contentPane.add(drawingPanel, BorderLayout.CENTER);
 		drawingPanel.setBorder(blackline);
 	}
+
 	private MouseAdapter pnlDrawingClickLitener() {
 		return new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if(tglBtnPoint.isSelected()) {
-					Point clickPoint=new Point(e.getX(),e.getY());
+				if (tglBtnPoint.isSelected()) {
+					Point clickPoint = new Point(e.getX(), e.getY());
 					drawingPanel.addShape(clickPoint);
-				}
-				else if(tglBtnLine.isSelected()) {
-					Point startPoint=new Point(e.getX(),e.getY());
-					Point endPoint=new Point(e.getX()+10,e.getY()+10);
-					Line line=new Line(startPoint,endPoint);
+				} else if (tglBtnLine.isSelected()) {
+					Point startPoint = new Point(e.getX(), e.getY());
+					Point endPoint = new Point(e.getX() + 10, e.getY() + 10);
+					Line line = new Line(startPoint, endPoint);
 					drawingPanel.addShape(line);
-				}
-				else if(tglBtnSelect.isSelected()) {
-					drawingPanel.select(e.getX(),e.getY());
-					}
-				else if(tglBtnRectangle.isSelected()) {
-					DlgRectangle dlgRectangle=new DlgRectangle();
+				} else if (tglBtnSelect.isSelected()) {
+					drawingPanel.select(e.getX(), e.getY());
+				} else if (tglBtnRectangle.isSelected()) {
+					DlgRectangle dlgRectangle = new DlgRectangle();
 					dlgRectangle.txtUpperX.setText(Integer.toString(e.getX()));
 					dlgRectangle.txtUpperY.setText(Integer.toString(e.getY()));
 					dlgRectangle.setVisible(true);
-					if(dlgRectangle.getRectangle()!=null) {
-					drawingPanel.addShape(dlgRectangle.getRectangle());
+					if (dlgRectangle.getRectangle() != null) {
+						drawingPanel.addShape(dlgRectangle.getRectangle());
 					}
-				}
-				else if(tglBtnCircle.isSelected()) {
-					DlgCircle dlgCircle=new DlgCircle();
+				} else if (tglBtnCircle.isSelected()) {
+					DlgCircle dlgCircle = new DlgCircle();
 					dlgCircle.txtCenterX.setText(Integer.toString(e.getX()));
 					dlgCircle.txtCenterY.setText(Integer.toString(e.getY()));
 					dlgCircle.setVisible(true);
-					if(dlgCircle.getCircle()!=null) {
+					if (dlgCircle.getCircle() != null) {
 						drawingPanel.addShape(dlgCircle.getCircle());
 					}
-				}
-				else if(tglBtnDonut.isSelected()) {
-					DlgDonut dlgDonut=new DlgDonut();
+				} else if (tglBtnDonut.isSelected()) {
+					DlgDonut dlgDonut = new DlgDonut();
 					dlgDonut.txtCentarX.setText(Integer.toString(e.getX()));
 					dlgDonut.txtCentarY.setText(Integer.toString(e.getY()));
 					dlgDonut.setVisible(true);
-					if(dlgDonut.getDonut()!=null) {
+					if (dlgDonut.getDonut() != null) {
 						drawingPanel.addShape(dlgDonut.getDonut());
 					}
 				}
-				}
-			};
+			}
 		};
-	}
+	};
+}
