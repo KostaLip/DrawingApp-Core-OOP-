@@ -10,8 +10,14 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Circle;
+import geometry.Point;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextArea;
@@ -21,6 +27,10 @@ import java.awt.event.ActionEvent;
 public class DlgCircle extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	JTextArea txtCenterX = new JTextArea();
+	JTextArea txtCenterY = new JTextArea();
+	JTextArea txtRadius = new JTextArea();
+	Circle krug=null;
 
 	/**
 	 * Launch the application.
@@ -61,7 +71,6 @@ public class DlgCircle extends JDialog {
 			contentPanel.add(lblCenterX, gbc_lblCenterX);
 		}
 		{
-			JTextArea txtCenterX = new JTextArea();
 			GridBagConstraints gbc_txtCenterX = new GridBagConstraints();
 			gbc_txtCenterX.insets = new Insets(0, 0, 5, 0);
 			gbc_txtCenterX.fill = GridBagConstraints.BOTH;
@@ -80,7 +89,6 @@ public class DlgCircle extends JDialog {
 			contentPanel.add(lblCenterY, gbc_lblCenterY);
 		}
 		{
-			JTextArea txtCenterY = new JTextArea();
 			GridBagConstraints gbc_txtCenterY = new GridBagConstraints();
 			gbc_txtCenterY.insets = new Insets(0, 0, 5, 0);
 			gbc_txtCenterY.fill = GridBagConstraints.BOTH;
@@ -99,7 +107,6 @@ public class DlgCircle extends JDialog {
 			contentPanel.add(lblRadius, gbc_lblRadius);
 		}
 		{
-			JTextArea txtRadius = new JTextArea();
 			GridBagConstraints gbc_txtRadius = new GridBagConstraints();
 			gbc_txtRadius.insets = new Insets(0, 0, 5, 0);
 			gbc_txtRadius.fill = GridBagConstraints.BOTH;
@@ -130,6 +137,44 @@ public class DlgCircle extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if (txtCenterX.getText().isEmpty() || txtCenterY.getText().isEmpty()
+								|| txtRadius.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtCenterX.getText())) {
+							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtCenterY.getText())) {
+							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtRadius.getText())) {
+							JOptionPane.showMessageDialog(null, "Poluprecnik mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (isNumeric(txtCenterX.getText()) && isNumeric(txtCenterY.getText())
+								&& isNumeric(txtRadius.getText())) {
+							int x = Integer.parseInt(txtCenterX.getText());
+							int y = Integer.parseInt(txtCenterY.getText());
+							int radius = Integer.parseInt(txtRadius.getText());
+							if (x < 0) {
+								JOptionPane.showMessageDialog(null, "X osa mora biti veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else if (y < 0) {
+								JOptionPane.showMessageDialog(null, "Y osa mora biti veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else if (radius <= 0) {
+								JOptionPane.showMessageDialog(null, "Poluprecnik mora biti strogo veci od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							}
+							else {
+								Point center=new Point(x,y);
+								krug=new Circle(center,radius);
+								dispose();
+							}
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -145,6 +190,23 @@ public class DlgCircle extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	private static boolean isNumeric(String str) {
+		int number;
+		if (str == null || str == "") {
+			return false;
+		}
+		try {
+			number = Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+	
+	public Circle getCircle() {
+		return krug;
 	}
 
 }

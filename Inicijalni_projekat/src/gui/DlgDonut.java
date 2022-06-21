@@ -10,8 +10,15 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Circle;
+import geometry.Donut;
+import geometry.Point;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextArea;
@@ -21,6 +28,11 @@ import java.awt.event.ActionEvent;
 public class DlgDonut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	JTextArea txtCentarX = new JTextArea();
+	JTextArea txtCentarY = new JTextArea();
+	JTextArea txtRadius = new JTextArea();
+	JTextArea txtInnerRadius = new JTextArea();
+	Donut kifla=null;
 
 	/**
 	 * Launch the application.
@@ -61,15 +73,14 @@ public class DlgDonut extends JDialog {
 			contentPanel.add(lblCenterX, gbc_lblCenterX);
 		}
 		{
-			JTextArea txtCenterX = new JTextArea();
 			GridBagConstraints gbc_txtCenterX = new GridBagConstraints();
 			gbc_txtCenterX.insets = new Insets(0, 0, 5, 0);
 			gbc_txtCenterX.fill = GridBagConstraints.BOTH;
 			gbc_txtCenterX.gridx = 1;
 			gbc_txtCenterX.gridy = 0;
-			JScrollPane scrollTxtCenterX = new JScrollPane(txtCenterX);
+			JScrollPane scrollTxtCenterX = new JScrollPane(txtCentarX);
 			contentPanel.add(scrollTxtCenterX, gbc_txtCenterX);
-			txtCenterX.setLineWrap(true);
+			txtCentarX.setLineWrap(true);
 		}
 		{
 			JLabel lblCenterY = new JLabel("Y coordinate of Center");
@@ -80,15 +91,14 @@ public class DlgDonut extends JDialog {
 			contentPanel.add(lblCenterY, gbc_lblCenterY);
 		}
 		{
-			JTextArea txtCenterY = new JTextArea();
 			GridBagConstraints gbc_txtCenterY = new GridBagConstraints();
 			gbc_txtCenterY.insets = new Insets(0, 0, 5, 0);
 			gbc_txtCenterY.fill = GridBagConstraints.BOTH;
 			gbc_txtCenterY.gridx = 1;
 			gbc_txtCenterY.gridy = 1;
-			JScrollPane scrollTxtCenterY = new JScrollPane(txtCenterY);
+			JScrollPane scrollTxtCenterY = new JScrollPane(txtCentarY);
 			contentPanel.add(scrollTxtCenterY, gbc_txtCenterY);
-			txtCenterY.setLineWrap(true);
+			txtCentarY.setLineWrap(true);
 		}
 		{
 			JLabel lblRadius = new JLabel("Radius");
@@ -99,7 +109,6 @@ public class DlgDonut extends JDialog {
 			contentPanel.add(lblRadius, gbc_lblRadius);
 		}
 		{
-			JTextArea txtRadius = new JTextArea();
 			GridBagConstraints gbc_txtRadius = new GridBagConstraints();
 			gbc_txtRadius.insets = new Insets(0, 0, 5, 0);
 			gbc_txtRadius.fill = GridBagConstraints.BOTH;
@@ -118,7 +127,6 @@ public class DlgDonut extends JDialog {
 			contentPanel.add(lblInnerRadius, gbc_lblInnerRadius);
 		}
 		{
-			JTextArea txtInnerRadius = new JTextArea();
 			GridBagConstraints gbc_txtInnerRadius = new GridBagConstraints();
 			gbc_txtInnerRadius.insets = new Insets(0, 0, 5, 0);
 			gbc_txtInnerRadius.fill = GridBagConstraints.BOTH;
@@ -149,6 +157,54 @@ public class DlgDonut extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (txtCentarX.getText().isEmpty() || txtCentarY.getText().isEmpty()
+								|| txtRadius.getText().isEmpty() || txtInnerRadius.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtCentarX.getText())) {
+							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtCentarY.getText())) {
+							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtRadius.getText())) {
+							JOptionPane.showMessageDialog(null, "Poluprecnik mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtInnerRadius.getText())) {
+							JOptionPane.showMessageDialog(null, "InnerRadius mora biti broj", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (isNumeric(txtCentarX.getText()) && isNumeric(txtCentarY.getText())
+								&& isNumeric(txtRadius.getText()) && isNumeric(txtInnerRadius.getText())) {
+							int x = Integer.parseInt(txtCentarX.getText());
+							int y = Integer.parseInt(txtCentarY.getText());
+							int radius = Integer.parseInt(txtRadius.getText());
+							int innerRadius = Integer.parseInt(txtInnerRadius.getText());
+							if (x < 0) {
+								JOptionPane.showMessageDialog(null, "X osa mora biti veca 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else if (y < 0) {
+								JOptionPane.showMessageDialog(null, "Y osa mora biti veca od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else if (radius <= 0) {
+								JOptionPane.showMessageDialog(null, "Poluprecnik mora biti strogo veci od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else if (innerRadius <= 0) {
+								JOptionPane.showMessageDialog(null, "InnerRadius mora biti strogo veci od 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else if (innerRadius >= radius) {
+								JOptionPane.showMessageDialog(null,
+										"InnerRadius mora biti storgo manji od poluprecnika", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else {
+								Point center = new Point(x, y);
+								kifla = new Donut(center, radius, innerRadius);
+								dispose();
+							}
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -166,4 +222,20 @@ public class DlgDonut extends JDialog {
 		}
 	}
 
+	private static boolean isNumeric(String str) {
+		int number;
+		if (str == null || str == "") {
+			return false;
+		}
+		try {
+			number = Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+	public Donut getDonut() {
+		return this.kifla;
+	}
 }

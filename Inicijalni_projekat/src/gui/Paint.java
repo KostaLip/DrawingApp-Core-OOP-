@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import gui.Drawing;
 import geometry.Line;
 import geometry.Point;
+import geometry.Rectangle;
 import geometry.Shape;
 
 import java.awt.GridBagLayout;
@@ -209,6 +210,33 @@ public class Paint extends JFrame {
 				else if(tglBtnSelect.isSelected()) {
 					drawingPanel.select(e.getX(),e.getY());
 					}
+				else if(tglBtnRectangle.isSelected()) {
+					DlgRectangle dlgRectangle=new DlgRectangle();
+					dlgRectangle.txtUpperX.setText(Integer.toString(e.getX()));
+					dlgRectangle.txtUpperY.setText(Integer.toString(e.getY()));
+					dlgRectangle.setVisible(true);
+					if(dlgRectangle.getRectangle()!=null) {
+					drawingPanel.addShape(dlgRectangle.getRectangle());
+					}
+				}
+				else if(tglBtnCircle.isSelected()) {
+					DlgCircle dlgCircle=new DlgCircle();
+					dlgCircle.txtCenterX.setText(Integer.toString(e.getX()));
+					dlgCircle.txtCenterY.setText(Integer.toString(e.getY()));
+					dlgCircle.setVisible(true);
+					if(dlgCircle.getCircle()!=null) {
+						drawingPanel.addShape(dlgCircle.getCircle());
+					}
+				}
+				else if(tglBtnDonut.isSelected()) {
+					DlgDonut dlgDonut=new DlgDonut();
+					dlgDonut.txtCentarX.setText(Integer.toString(e.getX()));
+					dlgDonut.txtCentarY.setText(Integer.toString(e.getY()));
+					dlgDonut.setVisible(true);
+					if(dlgDonut.getDonut()!=null) {
+						drawingPanel.addShape(dlgDonut.getDonut());
+					}
+				}
 				}
 			};
 		};

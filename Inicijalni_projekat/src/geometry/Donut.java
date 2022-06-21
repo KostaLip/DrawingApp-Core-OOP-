@@ -9,6 +9,11 @@ public class Donut extends Circle {
 	public Donut() {
 
 	}
+	
+	public Donut (Point center,int radius,int innerRadius) {
+		super(center,radius);
+		this.innerRadius=innerRadius;
+	}
 
 	public Donut(Point center, int radius, int innerRadius, boolean selected) {
 		super(center, radius, selected);

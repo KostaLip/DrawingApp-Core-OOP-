@@ -23,35 +23,36 @@ import geometry.Shape;
 import gui.Paint;
 
 public class Drawing extends JPanel {
-	
-	private ArrayList<Shape>shapes=new ArrayList<Shape>();
+
+	private ArrayList<Shape> shapes = new ArrayList<Shape>();
 	int br;
 	private Shape selectedShape;
+	Color boja;
 
 	public Drawing() {
-			setBackground(Color.WHITE);
+		setBackground(Color.WHITE);
 	}
-	
+
 	public void paint(Graphics g) {
 		super.paint(g);
-		Iterator<Shape>it=shapes.iterator();
-		while(it.hasNext()) {
-			Shape sh=it.next();
+		Iterator<Shape> it = shapes.iterator();
+		while (it.hasNext()) {
+			Shape sh = it.next();
 			sh.draw(g);
 		}
 	}
-	
+
 	public void addShape(Shape sh) {
 		shapes.add(sh);
 		repaint();
 	}
 
-	public ArrayList<Shape> getShapes(){
+	public ArrayList<Shape> getShapes() {
 		return shapes;
 	}
-	
-	public void select(int x,int y) {
-		for (br = shapes.size()-1; br >= 0; br--) {
+
+	public void select(int x, int y) {
+		for (br = shapes.size() - 1; br >= 0; br--) {
 			shapes.get(br).setSelected(false);
 			repaint();
 			if (shapes.get(br).contains(x, y)) {
@@ -61,12 +62,16 @@ public class Drawing extends JPanel {
 			}
 		}
 	}
-	
+
 	public Shape getSelectedShape() {
 		return selectedShape;
 	}
-	
+
 	public boolean isShapesEmpty() {
 		return shapes.isEmpty();
+	}
+
+	public void setColor(Color r) {
+		this.boja = r;
 	}
 }
