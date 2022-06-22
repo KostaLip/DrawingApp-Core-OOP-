@@ -28,8 +28,8 @@ import java.awt.event.ActionEvent;
 public class DlgPoint extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	JTextArea txtX = new JTextArea();
-	JTextArea txtY = new JTextArea();
+	protected JTextArea txtX = new JTextArea();
+	protected JTextArea txtY = new JTextArea();
 	Point tacka = null;
 	Color boja;
 	private boolean colorChanged;
@@ -126,22 +126,22 @@ public class DlgPoint extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (txtX.getText().isEmpty() || txtY.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+							JOptionPane.showMessageDialog(null, "YOU MUST ENTER ALL DATA", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtX.getText())) {
-							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtY.getText())) {
-							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (isNumeric(txtX.getText()) && isNumeric(txtY.getText())) {
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							if (x < 0) {
-								JOptionPane.showMessageDialog(null, "X osa mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (y < 0) {
-								JOptionPane.showMessageDialog(null, "Y osa mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else {
 								tacka = new Point(x, y);

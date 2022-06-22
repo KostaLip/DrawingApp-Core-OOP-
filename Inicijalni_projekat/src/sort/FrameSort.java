@@ -17,14 +17,16 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Circle;
 import geometry.Rectangle;
 import java.awt.Color;
 
 public class FrameSort extends JFrame {
 
 	private JPanel contentPane;
-	private ArrayList<Rectangle> recLst = new ArrayList<Rectangle>();
-	private DefaultListModel<Rectangle> dlm = new DefaultListModel<Rectangle>();
+	private ArrayList<Circle> crcLst = new ArrayList<Circle>();
+	private DefaultListModel<Circle> dlm = new DefaultListModel<Circle>();
 	JList sortLst = new JList();
 
 	/**
@@ -82,11 +84,11 @@ public class FrameSort extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DialogSort dlgSort = new DialogSort();
 				dlgSort.setVisible(true);
-				if (dlgSort.getRectangle() != null) {
-					recLst.add(dlgSort.getRectangle());
+				if (dlgSort.getCircle() != null) {
+					crcLst.add(dlgSort.getCircle());
 				}
-				recLst.sort(null);
-				sortLst.setModel(sortRects());
+				crcLst.sort(null);
+				sortLst.setModel(sortCircle());
 			}
 		});
 		JButton btnClose = new JButton("CLOSE");
@@ -107,9 +109,9 @@ public class FrameSort extends JFrame {
 		pnlSouth.setLayout(glPnlSouth);
 	}
 
-	private DefaultListModel<Rectangle> sortRects() {
-		Iterator<Rectangle> it = recLst.iterator();
-		DefaultListModel<Rectangle> dlm = new DefaultListModel<Rectangle>();
+	private DefaultListModel<Circle> sortCircle() {
+		Iterator<Circle> it = crcLst.iterator();
+		DefaultListModel<Circle> dlm = new DefaultListModel<Circle>();
 		while (it.hasNext()) {
 			dlm.addElement(it.next());
 		}

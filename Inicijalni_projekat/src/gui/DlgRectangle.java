@@ -26,10 +26,10 @@ import java.awt.event.ActionEvent;
 public class DlgRectangle extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	JTextArea txtUpperX = new JTextArea();
-	JTextArea txtUpperY = new JTextArea();
-	JTextArea txtWidth = new JTextArea();
-	JTextArea txtHeight = new JTextArea();
+	protected JTextArea txtUpperX = new JTextArea();
+	protected JTextArea txtUpperY = new JTextArea();
+	protected JTextArea txtWidth = new JTextArea();
+	protected JTextArea txtHeight = new JTextArea();
 	Rectangle rec = null;
 	private boolean colorChanged;
 	Drawing drwPnl = new Drawing();
@@ -178,19 +178,19 @@ public class DlgRectangle extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						if (txtUpperX.getText().isEmpty() || txtUpperY.getText().isEmpty()
 								|| txtWidth.getText().isEmpty() || txtHeight.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+							JOptionPane.showMessageDialog(null, "YOU MUST ENTER ALL DATA", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNmueric(txtUpperX.getText())) {
-							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNmueric(txtUpperY.getText())) {
-							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNmueric(txtWidth.getText())) {
-							JOptionPane.showMessageDialog(null, "Sirina mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "WIDTH MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNmueric(txtHeight.getText())) {
-							JOptionPane.showMessageDialog(null, "Visina mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "HEIGHT MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (isNmueric(txtUpperX.getText()) && isNmueric(txtUpperY.getText())
 								&& isNmueric(txtWidth.getText()) && isNmueric(txtHeight.getText())) {
@@ -199,16 +199,16 @@ public class DlgRectangle extends JDialog {
 							int width = Integer.parseInt(txtWidth.getText());
 							int height = Integer.parseInt(txtHeight.getText());
 							if (x < 0) {
-								JOptionPane.showMessageDialog(null, "X osa mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (y < 0) {
-								JOptionPane.showMessageDialog(null, "Y osa mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (width <= 0) {
-								JOptionPane.showMessageDialog(null, "Sirina mora biti strogo veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "WIDTH MUST BE STRICTLY GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (height <= 0) {
-								JOptionPane.showMessageDialog(null, "Visina mora biti strogo veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "HEIGHT MUST BE STRICTLY GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else {
 								Point upperL = new Point(x, y);

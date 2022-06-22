@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import geometry.Circle;
 import geometry.Point;
 import geometry.Rectangle;
 
@@ -34,11 +35,11 @@ public class DialogSort extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JButton btnOk;
 	private JButton btnCancel;
-	private Rectangle rectangle = null;
+	private Circle circle = null;
+	private JLabel lblX;
 	private JTextField txtX;
 	private JTextField txtY;
-	private JTextField txtWidth;
-	private JTextField txtHeight;
+	private JTextField txtRadius;
 
 	/**
 	 * Launch the application.
@@ -54,7 +55,7 @@ public class DialogSort extends JDialog {
 	}
 
 	public DialogSort() {
-		setTitle("ADD RECTANGLE");
+		setTitle("ADD CIRCLE");
 		setModal(true);
 		setResizable(false);
 		setBounds(100, 100, 306, 250);
@@ -69,10 +70,9 @@ public class DialogSort extends JDialog {
 		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		contentPanel.setLayout(gbl_contentPanel);
 
-		JLabel lblX = new JLabel("X coordinate");
+		lblX = new JLabel("X coordinate of center");
 		GridBagConstraints gbc_lblX = new GridBagConstraints();
 		gbc_lblX.insets = new Insets(0, 0, 5, 5);
-		gbc_lblX.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_lblX.gridx = 1;
 		gbc_lblX.gridy = 0;
 		contentPanel.add(lblX, gbc_lblX);
@@ -86,7 +86,7 @@ public class DialogSort extends JDialog {
 		contentPanel.add(txtX, gbc_txtX);
 		txtX.setColumns(10);
 
-		JLabel lblY = new JLabel("Y coordinate");
+		JLabel lblY = new JLabel("Y coordinate of center");
 		GridBagConstraints gbc_lblY = new GridBagConstraints();
 		gbc_lblY.insets = new Insets(0, 0, 5, 5);
 		gbc_lblY.gridx = 1;
@@ -102,36 +102,21 @@ public class DialogSort extends JDialog {
 		contentPanel.add(txtY, gbc_txtY);
 		txtY.setColumns(10);
 
-		JLabel lblWidth = new JLabel("Width");
-		GridBagConstraints gbc_lblWidth = new GridBagConstraints();
-		gbc_lblWidth.insets = new Insets(0, 0, 5, 5);
-		gbc_lblWidth.gridx = 1;
-		gbc_lblWidth.gridy = 2;
-		contentPanel.add(lblWidth, gbc_lblWidth);
+		JLabel lblRadius = new JLabel("RADIUS");
+		GridBagConstraints gbc_lblRadius = new GridBagConstraints();
+		gbc_lblRadius.insets = new Insets(0, 0, 5, 5);
+		gbc_lblRadius.gridx = 1;
+		gbc_lblRadius.gridy = 2;
+		contentPanel.add(lblRadius, gbc_lblRadius);
 
-		txtWidth = new JTextField();
-		GridBagConstraints gbc_txtWidth = new GridBagConstraints();
-		gbc_txtWidth.insets = new Insets(0, 0, 5, 0);
-		gbc_txtWidth.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtWidth.gridx = 3;
-		gbc_txtWidth.gridy = 2;
-		contentPanel.add(txtWidth, gbc_txtWidth);
-		txtWidth.setColumns(10);
-
-		JLabel lblHeight = new JLabel("Height");
-		GridBagConstraints gbc_lblHeight = new GridBagConstraints();
-		gbc_lblHeight.insets = new Insets(0, 0, 0, 5);
-		gbc_lblHeight.gridx = 1;
-		gbc_lblHeight.gridy = 3;
-		contentPanel.add(lblHeight, gbc_lblHeight);
-
-		txtHeight = new JTextField();
-		GridBagConstraints gbc_txtHeight = new GridBagConstraints();
-		gbc_txtHeight.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtHeight.gridx = 3;
-		gbc_txtHeight.gridy = 3;
-		contentPanel.add(txtHeight, gbc_txtHeight);
-		txtHeight.setColumns(10);
+		txtRadius = new JTextField();
+		GridBagConstraints gbc_txtRadius = new GridBagConstraints();
+		gbc_txtRadius.insets = new Insets(0, 0, 5, 0);
+		gbc_txtRadius.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtRadius.gridx = 3;
+		gbc_txtRadius.gridy = 2;
+		contentPanel.add(txtRadius, gbc_txtRadius);
+		txtRadius.setColumns(10);
 		{
 			JPanel btnPane = new JPanel();
 			getContentPane().add(btnPane, BorderLayout.SOUTH);
@@ -139,42 +124,34 @@ public class DialogSort extends JDialog {
 				btnOk = new JButton("ADD");
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (txtX.getText().isEmpty() || txtY.getText().isEmpty() || txtWidth.getText().isEmpty()
-								|| txtHeight.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+						if (txtX.getText().isEmpty() || txtY.getText().isEmpty() || txtRadius.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "YOU MUST ENTER ALL THE DATA", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtX.getText())) {
-							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtY.getText())) {
-							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
-						} else if (!isNumeric(txtWidth.getText())) {
-							JOptionPane.showMessageDialog(null, "Sirina mora biti broj", "ERROR",
-									JOptionPane.ERROR_MESSAGE);
-						} else if (!isNumeric(txtHeight.getText())) {
-							JOptionPane.showMessageDialog(null, "Visina mora biti broj", "ERROR",
+						} else if (!isNumeric(txtRadius.getText())) {
+							JOptionPane.showMessageDialog(null, "RADIUS MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (isNumeric(txtX.getText()) && isNumeric(txtY.getText())
-								&& isNumeric(txtWidth.getText()) && isNumeric(txtHeight.getText())) {
+								&& isNumeric(txtRadius.getText())) {
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
-							int width = Integer.parseInt(txtWidth.getText());
-							int height = Integer.parseInt(txtHeight.getText());
+							int radius = Integer.parseInt(txtRadius.getText());
 							if (x < 0) {
-								JOptionPane.showMessageDialog(null, "X koordinata mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (y < 0) {
-								JOptionPane.showMessageDialog(null, "Y koordinata mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
-							} else if (width <= 0) {
-								JOptionPane.showMessageDialog(null, "Sirina mora biti strogo veca od 0", "ERROR",
-										JOptionPane.ERROR_MESSAGE);
-							} else if (height <= 0) {
-								JOptionPane.showMessageDialog(null, "Visina mora biti strogo veca od 0", "ERROR",
+							} else if (radius <= 0) {
+								JOptionPane.showMessageDialog(null, "RADIUS MUST BE STRICTLY GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else {
-								rectangle = new Rectangle(new Point(x, y), width, height);
+								circle = new Circle(new Point(x, y), radius);
 								dispose();
 							}
 						}
@@ -203,15 +180,14 @@ public class DialogSort extends JDialog {
 		}
 	}
 
-	public Rectangle getRectangle() {
-		return rectangle;
+	public Circle getCircle() {
+		return circle;
 	}
 
-	public void setRectangle(Rectangle rect) {
-		txtX.setText("" + rect.getUpperLeftPoint().getX());
-		txtY.setText("" + rect.getUpperLeftPoint().getY());
-		txtHeight.setText("" + rect.getHeight());
-		txtWidth.setText("" + rect.getWidth());
+	public void setCircle(Circle circ) {
+		txtX.setText("" + circ.getCenter().getX());
+		txtY.setText("" + circ.getCenter().getY());
+		txtRadius.setText("" + circ.getRadius());
 	}
 
 	private static boolean isNumeric(String str) {

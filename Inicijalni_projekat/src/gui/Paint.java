@@ -44,13 +44,13 @@ public class Paint extends JFrame {
 	Border blackline = BorderFactory.createLineBorder(Color.black);
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
 	private Drawing drawingPanel = new Drawing();
-	JToggleButton tglBtnPoint = new JToggleButton("Point");
-	JToggleButton tglBtnLine = new JToggleButton("Line");
-	JToggleButton tglBtnRectangle = new JToggleButton("Rectangle");
-	JToggleButton tglBtnCircle = new JToggleButton("Circle");
-	JToggleButton tglBtnDonut = new JToggleButton("Donut");
-	JToggleButton tglBtnSelect = new JToggleButton("Select");
-	JToggleButton tglBtnEdit = new JToggleButton("Edit");
+	private JToggleButton tglBtnPoint = new JToggleButton("Point");
+	private JToggleButton tglBtnLine = new JToggleButton("Line");
+	private JToggleButton tglBtnRectangle = new JToggleButton("Rectangle");
+	private JToggleButton tglBtnCircle = new JToggleButton("Circle");
+	private JToggleButton tglBtnDonut = new JToggleButton("Donut");
+	private JToggleButton tglBtnSelect = new JToggleButton("Select");
+	private JToggleButton tglBtnEdit = new JToggleButton("Edit");
 
 	/**
 	 * Launch the application.
@@ -169,9 +169,9 @@ public class Paint extends JFrame {
 		tglBtnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (drawingPanel.isShapesEmpty()) {
-					JOptionPane.showMessageDialog(null, "NEMA NACRTANIH OBLIKA", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "THERE ARE NO DRAWN SHAPES", "ERROR", JOptionPane.ERROR_MESSAGE);
 				} else if (drawingPanel.getSelectedShape() == null) {
-					JOptionPane.showMessageDialog(null, "NEMA SELEKTOVANIH OBLIKA", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "THERE ARE NO SELECTED SHAPES", "ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 					drawingPanel.getShapes().remove(drawingPanel.getSelectedShape());
 					repaint();
@@ -190,9 +190,9 @@ public class Paint extends JFrame {
 		tglBtnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (drawingPanel.isShapesEmpty()) {
-					JOptionPane.showMessageDialog(null, "NEMA NACRTANIH OBLIKA", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "THERE ARE NO DRAWN SHAPES", "ERROR", JOptionPane.ERROR_MESSAGE);
 				} else if (drawingPanel.getSelectedShape() == null) {
-					JOptionPane.showMessageDialog(null, "NEMA SELEKTOVANIH OBLIKA", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "THERE ARE NO SELECTED SHAPES", "ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 					if (drawingPanel.getSelectedShape() instanceof Point) {
 						Point p = (Point) drawingPanel.getSelectedShape();
@@ -282,9 +282,11 @@ public class Paint extends JFrame {
 					drawingPanel.addShape(clickPoint);
 				} else if (tglBtnLine.isSelected()) {
 					Point startPoint = new Point(e.getX(), e.getY());
-					Point endPoint = new Point(e.getX() - 60, e.getY() - 60);
-					Line line = new Line(startPoint, endPoint);
-					repaint();
+					DlgLine dlgLine=new DlgLine();
+					dlgLine.txtStartX.setText(Integer.toString(e.getX()));
+					dlgLine.txtStartY.setText(Integer.toString(e.getY()));
+					dlgLine.setVisible(true);
+					Line line=dlgLine.getLine();
 					drawingPanel.addShape(line);
 				} else if (tglBtnSelect.isSelected()) {
 					drawingPanel.select(e.getX(), e.getY());

@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Circle;
 import geometry.Rectangle;
 import javax.swing.JButton;
 import javax.swing.DefaultListModel;
@@ -22,7 +24,7 @@ public class FrameStack extends JFrame {
 
 	JList stackLst = new JList();
 	private JPanel contentPane;
-	private DefaultListModel<Rectangle> dlm = new DefaultListModel<Rectangle>();
+	private DefaultListModel<Circle> dlm = new DefaultListModel<Circle>();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -75,8 +77,8 @@ public class FrameStack extends JFrame {
 				DialogStack dlgStack = new DialogStack();
 				dlgStack.setVisible(true);
 
-				if (dlgStack.getRectangle() != null) {
-					dlm.add(br, dlgStack.getRectangle());
+				if (dlgStack.getCircle() != null) {
+					dlm.add(br, dlgStack.getCircle());
 					br++;
 				}
 			}
@@ -88,7 +90,7 @@ public class FrameStack extends JFrame {
 				if (!dlm.isEmpty()) {
 					dlm.removeElementAt(0);
 				} else {
-					JOptionPane.showMessageDialog(null, "STEK JE PRAZAN", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "STACK IS EMPTY", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

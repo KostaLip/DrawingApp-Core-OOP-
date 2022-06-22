@@ -28,10 +28,10 @@ import java.awt.event.ActionEvent;
 public class DlgDonut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	JTextArea txtCentarX = new JTextArea();
-	JTextArea txtCentarY = new JTextArea();
-	JTextArea txtRadius = new JTextArea();
-	JTextArea txtInnerRadius = new JTextArea();
+	protected JTextArea txtCentarX = new JTextArea();
+	protected JTextArea txtCentarY = new JTextArea();
+	protected JTextArea txtRadius = new JTextArea();
+	protected JTextArea txtInnerRadius = new JTextArea();
 	Donut kifla = null;
 	Color boja;
 	JButton btnColor = new JButton("CHOSE COLOR");
@@ -164,19 +164,19 @@ public class DlgDonut extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if (txtCentarX.getText().isEmpty() || txtCentarY.getText().isEmpty()
 								|| txtRadius.getText().isEmpty() || txtInnerRadius.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+							JOptionPane.showMessageDialog(null, "YOU MUST ENTER ALL DATA", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtCentarX.getText())) {
-							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtCentarY.getText())) {
-							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtRadius.getText())) {
-							JOptionPane.showMessageDialog(null, "Poluprecnik mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "RADIUS MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtInnerRadius.getText())) {
-							JOptionPane.showMessageDialog(null, "InnerRadius mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "INNERRADIUS MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (isNumeric(txtCentarX.getText()) && isNumeric(txtCentarY.getText())
 								&& isNumeric(txtRadius.getText()) && isNumeric(txtInnerRadius.getText())) {
@@ -185,21 +185,20 @@ public class DlgDonut extends JDialog {
 							int radius = Integer.parseInt(txtRadius.getText());
 							int innerRadius = Integer.parseInt(txtInnerRadius.getText());
 							if (x < 0) {
-								JOptionPane.showMessageDialog(null, "X osa mora biti veca 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (y < 0) {
-								JOptionPane.showMessageDialog(null, "Y osa mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (radius <= 0) {
-								JOptionPane.showMessageDialog(null, "Poluprecnik mora biti strogo veci od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "RADIUS MUST BE STRICTLY GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (innerRadius <= 0) {
-								JOptionPane.showMessageDialog(null, "InnerRadius mora biti strogo veci od 0", "ERROR",
-										JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null, "INNERRADIUS MUST BE STRICTLY GREATER THAN 0",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
 							} else if (innerRadius >= radius) {
-								JOptionPane.showMessageDialog(null,
-										"InnerRadius mora biti storgo manji od poluprecnika", "ERROR",
-										JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null, "INNERRADIUS MUST BE STRICTLY LESS THAN RADIUS",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
 							} else {
 								Point center = new Point(x, y);
 								kifla = new Donut(center, radius, innerRadius);

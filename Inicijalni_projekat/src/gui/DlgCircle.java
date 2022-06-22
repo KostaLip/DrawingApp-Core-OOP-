@@ -27,9 +27,9 @@ import java.awt.event.ActionEvent;
 public class DlgCircle extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	JTextArea txtCenterX = new JTextArea();
-	JTextArea txtCenterY = new JTextArea();
-	JTextArea txtRadius = new JTextArea();
+	protected JTextArea txtCenterX = new JTextArea();
+	protected JTextArea txtCenterY = new JTextArea();
+	protected JTextArea txtRadius = new JTextArea();
 	Circle krug = null;
 	Color boja;
 	private boolean colorChanged;
@@ -144,16 +144,16 @@ public class DlgCircle extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						if (txtCenterX.getText().isEmpty() || txtCenterY.getText().isEmpty()
 								|| txtRadius.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "MORATE UNIJETI SVE PODATKE", "ERROR",
+							JOptionPane.showMessageDialog(null, "YOU MUST ENTER ALL DATA", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtCenterX.getText())) {
-							JOptionPane.showMessageDialog(null, "X osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtCenterY.getText())) {
-							JOptionPane.showMessageDialog(null, "Y osa mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (!isNumeric(txtRadius.getText())) {
-							JOptionPane.showMessageDialog(null, "Poluprecnik mora biti broj", "ERROR",
+							JOptionPane.showMessageDialog(null, "RADIUS MUST BE A NUMBER", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						} else if (isNumeric(txtCenterX.getText()) && isNumeric(txtCenterY.getText())
 								&& isNumeric(txtRadius.getText())) {
@@ -161,13 +161,13 @@ public class DlgCircle extends JDialog {
 							int y = Integer.parseInt(txtCenterY.getText());
 							int radius = Integer.parseInt(txtRadius.getText());
 							if (x < 0) {
-								JOptionPane.showMessageDialog(null, "X osa mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "X COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (y < 0) {
-								JOptionPane.showMessageDialog(null, "Y osa mora biti veca od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else if (radius <= 0) {
-								JOptionPane.showMessageDialog(null, "Poluprecnik mora biti strogo veci od 0", "ERROR",
+								JOptionPane.showMessageDialog(null, "RADIUS MUST BE STRICTLY GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
 							} else {
 								Point center = new Point(x, y);

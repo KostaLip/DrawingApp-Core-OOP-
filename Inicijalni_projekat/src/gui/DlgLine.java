@@ -10,10 +10,17 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Line;
+import geometry.Point;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -21,7 +28,14 @@ import java.awt.event.ActionEvent;
 public class DlgLine extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	protected JTextArea txtStartX = new JTextArea();
+	protected JTextArea txtStartY = new JTextArea();
+	protected JTextArea txtEndX = new JTextArea();
+	protected JTextArea txtEndY = new JTextArea();
 	Color boja;
+	private Line line = null;
+	private boolean colorChanged = false;
+	protected JButton btnColor = new JButton("CHOSE COLOR");
 
 	/**
 	 * Launch the application.
@@ -61,7 +75,6 @@ public class DlgLine extends JDialog {
 			contentPanel.add(lblStartX, gbc_lblStartX);
 		}
 		{
-			JTextArea txtStartX = new JTextArea();
 			GridBagConstraints gbc_txtStartX = new GridBagConstraints();
 			gbc_txtStartX.insets = new Insets(0, 0, 5, 0);
 			gbc_txtStartX.fill = GridBagConstraints.BOTH;
@@ -80,7 +93,6 @@ public class DlgLine extends JDialog {
 			contentPanel.add(lblStartY, gbc_lblStartY);
 		}
 		{
-			JTextArea txtStartY = new JTextArea();
 			GridBagConstraints gbc_txtStartY = new GridBagConstraints();
 			gbc_txtStartY.insets = new Insets(0, 0, 5, 0);
 			gbc_txtStartY.fill = GridBagConstraints.BOTH;
@@ -99,7 +111,6 @@ public class DlgLine extends JDialog {
 			contentPanel.add(lblEndX, gbc_lblEndX);
 		}
 		{
-			JTextArea txtEndX = new JTextArea();
 			GridBagConstraints gbc_txtEndX = new GridBagConstraints();
 			gbc_txtEndX.insets = new Insets(0, 0, 5, 0);
 			gbc_txtEndX.fill = GridBagConstraints.BOTH;
@@ -119,7 +130,6 @@ public class DlgLine extends JDialog {
 			contentPanel.add(lblEndY, gbc_lblEndY);
 		}
 		{
-			JTextArea txtEndY = new JTextArea();
 			GridBagConstraints gbc_txtEndY = new GridBagConstraints();
 			gbc_txtEndY.insets = new Insets(0, 0, 5, 0);
 			gbc_txtEndY.fill = GridBagConstraints.BOTH;
@@ -130,13 +140,13 @@ public class DlgLine extends JDialog {
 			txtEndY.setLineWrap(true);
 		}
 		{
-			JButton btnColor = new JButton("CHOSE COLOR");
 			btnColor.setBackground(Color.RED);
 			btnColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Color initialColor = Color.BLACK;
 					Color color = JColorChooser.showDialog(null, "Select a color", initialColor);
 					btnColor.setBackground(color);
+					colorChanged = true;
 				}
 			});
 			GridBagConstraints gbc_btnColor = new GridBagConstraints();
@@ -150,6 +160,57 @@ public class DlgLine extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if (txtStartX.getText().isEmpty() || txtStartY.getText().isEmpty()
+								|| txtEndX.getText().isEmpty() || txtEndY.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "YOU MUST ENTER ALL DATA", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtStartX.getText())) {
+							JOptionPane.showMessageDialog(null, "X COORDINATE OF START POINT MUST BE A NUMBER", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtStartY.getText())) {
+							JOptionPane.showMessageDialog(null, "Y COORDINATE OF START POINT MUST BE A NUMBER", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtEndX.getText())) {
+							JOptionPane.showMessageDialog(null, "X COORDINATE OF END POINT MUST BE A NUMBER", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (!isNumeric(txtEndY.getText())) {
+							JOptionPane.showMessageDialog(null, "Y COORDINATE OF END POINT MUST BE A NUMBER", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						} else if (isNumeric(txtStartX.getText()) && isNumeric(txtStartY.getText())
+								&& isNumeric(txtEndX.getText()) && isNumeric(txtEndY.getText())) {
+							int x1 = Integer.parseInt(txtStartX.getText());
+							int y1 = Integer.parseInt(txtStartY.getText());
+							int x2 = Integer.parseInt(txtEndX.getText());
+							int y2 = Integer.parseInt(txtEndY.getText());
+							if (x1 < 0) {
+								JOptionPane.showMessageDialog(null,
+										"X COORDINATE OF START POINT MUST BE GREATER THAN 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else if (y1 < 0) {
+								JOptionPane.showMessageDialog(null,
+										"Y COORDINATE OF START POINT MUST BE GREATER THAN 0", "ERROR",
+										JOptionPane.ERROR_MESSAGE);
+							} else if (x2 < 0) {
+								JOptionPane.showMessageDialog(null, "X COORDINATE OF END POINT MUST BE GREATER THAN 0",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
+							} else if (y2 < 0) {
+								JOptionPane.showMessageDialog(null, "Y COORDINATE OF END POINT MUST BE GREATER THAN 0",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
+							} else {
+								Point startPoint=new Point(x1,y1);
+								Point endPoint = new Point(x2, y2);
+								line = new Line(startPoint, endPoint);
+								if(colorChanged) {
+									boja=btnColor.getBackground();
+									line.setColor(boja);
+								}
+								dispose();
+							}
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -165,6 +226,23 @@ public class DlgLine extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	private static boolean isNumeric(String str) {
+		int number;
+		if (str == null || str == "") {
+			return false;
+		}
+		try {
+			number = Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+	public Line getLine() {
+		return this.line;
 	}
 
 	public Color getColor() {
