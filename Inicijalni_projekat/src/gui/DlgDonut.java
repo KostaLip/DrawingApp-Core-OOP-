@@ -35,7 +35,7 @@ public class DlgDonut extends JDialog {
 	Donut kifla = null;
 	Color boja;
 	JButton btnColor = new JButton("CHOSE COLOR");
-	private boolean colorChanged;
+	private boolean colorChanged=true;
 
 	/**
 	 * Launch the application.
@@ -58,6 +58,7 @@ public class DlgDonut extends JDialog {
 		setTitle("EDIT DONUT");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.PINK);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
@@ -140,7 +141,8 @@ public class DlgDonut extends JDialog {
 			txtInnerRadius.setLineWrap(true);
 		}
 		{
-			btnColor.setBackground(Color.RED);
+			btnColor.setForeground(Color.WHITE);
+			btnColor.setBackground(Color.BLACK);
 			btnColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Color initialColor = Color.BLACK;
@@ -156,6 +158,7 @@ public class DlgDonut extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.PINK);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

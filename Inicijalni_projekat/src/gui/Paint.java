@@ -27,6 +27,8 @@ import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -50,7 +52,8 @@ public class Paint extends JFrame {
 	private JToggleButton tglBtnCircle = new JToggleButton("Circle");
 	private JToggleButton tglBtnDonut = new JToggleButton("Donut");
 	private JToggleButton tglBtnSelect = new JToggleButton("Select");
-	private JToggleButton tglBtnEdit = new JToggleButton("Edit");
+	private JButton btnDelete = new JButton("Delete");
+	private JButton btnEdit = new JButton("Edit");
 
 	/**
 	 * Launch the application.
@@ -74,7 +77,7 @@ public class Paint extends JFrame {
 	 * @return
 	 */
 	public Paint() {
-		setTitle("Paint");
+		setTitle("Kosta Bjelogrlic IT31/2021");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 865, 551);
 		contentPane = new JPanel();
@@ -103,6 +106,12 @@ public class Paint extends JFrame {
 		lblShapes.setPreferredSize(new Dimension(140, 50));
 
 		buttonGroup.add(tglBtnPoint);
+		tglBtnPoint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				drawingPanel.getSelectedShape().setSelected(false);
+				drawingPanel.setAllFalse();
+			}
+		});
 		tglBtnPoint.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnPoint = new GridBagConstraints();
 		gbc_tglBtnPoint.insets = new Insets(0, 0, 5, 5);
@@ -112,6 +121,11 @@ public class Paint extends JFrame {
 		tglBtnPoint.setPreferredSize(new Dimension(100, 50));
 
 		buttonGroup.add(tglBtnLine);
+		tglBtnLine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawingPanel.setAllFalse();
+			}
+		});
 		tglBtnLine.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnLine = new GridBagConstraints();
 		gbc_tglBtnLine.insets = new Insets(0, 0, 5, 5);
@@ -121,6 +135,11 @@ public class Paint extends JFrame {
 		tglBtnLine.setPreferredSize(new Dimension(100, 50));
 
 		buttonGroup.add(tglBtnRectangle);
+		tglBtnRectangle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawingPanel.setAllFalse();
+			}
+		});
 		tglBtnRectangle.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnRectangle = new GridBagConstraints();
 		gbc_tglBtnRectangle.insets = new Insets(0, 0, 5, 5);
@@ -130,6 +149,11 @@ public class Paint extends JFrame {
 		tglBtnRectangle.setPreferredSize(new Dimension(100, 50));
 
 		buttonGroup.add(tglBtnCircle);
+		tglBtnCircle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawingPanel.setAllFalse();
+			}
+		});
 		tglBtnCircle.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnCircle = new GridBagConstraints();
 		gbc_tglBtnCircle.insets = new Insets(0, 0, 5, 5);
@@ -139,6 +163,11 @@ public class Paint extends JFrame {
 		tglBtnCircle.setPreferredSize(new Dimension(100, 50));
 
 		buttonGroup.add(tglBtnDonut);
+		tglBtnDonut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawingPanel.setAllFalse();
+			}
+		});
 		tglBtnDonut.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_tglBtnDonut = new GridBagConstraints();
 		gbc_tglBtnDonut.insets = new Insets(0, 0, 5, 0);
@@ -165,46 +194,54 @@ public class Paint extends JFrame {
 		pnlBtns.add(tglBtnSelect, gbc_tglBtnSelect);
 		tglBtnSelect.setPreferredSize(new Dimension(110, 30));
 
-		JToggleButton tglBtnDelete = new JToggleButton("Delete");
-		tglBtnDelete.addActionListener(new ActionListener() {
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (drawingPanel.isShapesEmpty()) {
-					JOptionPane.showMessageDialog(null, "THERE ARE NO DRAWN SHAPES", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "THERE ARE NO DRAWN SHAPES", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
 				} else if (drawingPanel.getSelectedShape() == null) {
-					JOptionPane.showMessageDialog(null, "THERE ARE NO SELECTED SHAPES", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "THERE ARE NO SELECTED SHAPES", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
 				} else {
-					drawingPanel.getShapes().remove(drawingPanel.getSelectedShape());
-					repaint();
-					drawingPanel.setSelectedShape();
+					int option = JOptionPane.showConfirmDialog(null, "DO YOU WANT TO DELETE SELECTED SHAPE");
+					if (option == JOptionPane.YES_OPTION) {
+						drawingPanel.getShapes().remove(drawingPanel.getSelectedShape());
+						repaint();
+						drawingPanel.setSelectedShape();
+					}
 				}
 			}
 		});
-		tglBtnDelete.setBackground(Color.GRAY);
-		buttonGroup.add(tglBtnDelete);
+		btnDelete.setBackground(Color.GRAY);
+		buttonGroup.add(btnDelete);
 		GridBagConstraints gbc_tglBtnDelete = new GridBagConstraints();
 		gbc_tglBtnDelete.insets = new Insets(0, 0, 5, 5);
 		gbc_tglBtnDelete.gridx = 7;
 		gbc_tglBtnDelete.gridy = 1;
-		pnlBtns.add(tglBtnDelete, gbc_tglBtnDelete);
-		tglBtnDelete.setPreferredSize(new Dimension(110, 30));
-		tglBtnEdit.addActionListener(new ActionListener() {
+		pnlBtns.add(btnDelete, gbc_tglBtnDelete);
+		btnDelete.setPreferredSize(new Dimension(110, 30));
+		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (drawingPanel.isShapesEmpty()) {
-					JOptionPane.showMessageDialog(null, "THERE ARE NO DRAWN SHAPES", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "THERE ARE NO DRAWN SHAPES", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
 				} else if (drawingPanel.getSelectedShape() == null) {
-					JOptionPane.showMessageDialog(null, "THERE ARE NO SELECTED SHAPES", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "THERE ARE NO SELECTED SHAPES", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
 				} else {
 					if (drawingPanel.getSelectedShape() instanceof Point) {
 						Point p = (Point) drawingPanel.getSelectedShape();
 						DlgPoint dlgPoint = new DlgPoint();
 						dlgPoint.txtX.setText(Integer.toString(p.getX()));
 						dlgPoint.txtY.setText(Integer.toString(p.getY()));
+						dlgPoint.btnColor.setBackground(p.getColor());
 						dlgPoint.setVisible(true);
 						if (dlgPoint.getPoint() != null) {
 							p.setX(dlgPoint.getPoint().getX());
 							p.setY(dlgPoint.getPoint().getY());
 							p.setColor(dlgPoint.getColor());
 							repaint();
+							drawingPanel.setAllFalse();
 						}
 					} else if (drawingPanel.getSelectedShape() instanceof Rectangle) {
 						Rectangle r = (Rectangle) drawingPanel.getSelectedShape();
@@ -213,6 +250,7 @@ public class Paint extends JFrame {
 						dlgRectangle.txtUpperY.setText(Integer.toString(r.getUpperLeftPoint().getY()));
 						dlgRectangle.txtWidth.setText(Integer.toString(r.getWidth()));
 						dlgRectangle.txtHeight.setText(Integer.toString(r.getHeight()));
+						dlgRectangle.btnColor.setBackground(r.getColor());
 						dlgRectangle.setVisible(true);
 						if (dlgRectangle.getRectangle() != null) {
 							Rectangle r2 = dlgRectangle.getRectangle();
@@ -222,6 +260,26 @@ public class Paint extends JFrame {
 							r.setHeight(r2.getHeight());
 							r.setColor(dlgRectangle.getColor());
 							repaint();
+							drawingPanel.setAllFalse();
+						}
+					} else if (drawingPanel.getSelectedShape() instanceof Line) {
+						Line l = (Line) drawingPanel.getSelectedShape();
+						DlgLine dlgLine = new DlgLine();
+						dlgLine.txtStartX.setText(Integer.toString(l.getStartPoint().getX()));
+						dlgLine.txtStartY.setText(Integer.toString(l.getStartPoint().getY()));
+						dlgLine.txtEndX.setText(Integer.toString(l.getEndPoint().getX()));
+						dlgLine.txtEndY.setText(Integer.toString(l.getEndPoint().getY()));
+						dlgLine.btnColor.setBackground(l.getColor());
+						dlgLine.setVisible(true);
+						if (dlgLine.getLine() != null) {
+							Line l2 = dlgLine.getLine();
+							Point startPoint = new Point(l2.getStartPoint().getX(), l2.getStartPoint().getY());
+							Point endPoint = new Point(l2.getEndPoint().getX(), l2.getEndPoint().getY());
+							l.setStartPoint(startPoint);
+							l.setEndPoint(endPoint);
+							l.setColor(dlgLine.getColor());
+							repaint();
+							drawingPanel.setAllFalse();
 						}
 					} else if (drawingPanel.getSelectedShape() instanceof Donut) {
 						Donut d = (Donut) drawingPanel.getSelectedShape();
@@ -230,6 +288,7 @@ public class Paint extends JFrame {
 						dlgDonut.txtCentarY.setText(Integer.toString(d.getCenter().getY()));
 						dlgDonut.txtRadius.setText(Integer.toString(d.getRadius()));
 						dlgDonut.txtInnerRadius.setText(Integer.toString(d.getInnerRadius()));
+						dlgDonut.btnColor.setBackground(d.getColor());
 						dlgDonut.setVisible(true);
 						if (dlgDonut.getDonut() != null) {
 							Donut d2 = dlgDonut.getDonut();
@@ -239,6 +298,7 @@ public class Paint extends JFrame {
 							d.setInnerRadius(d2.getInnerRadius());
 							d.setColor(dlgDonut.getColor());
 							repaint();
+							drawingPanel.setAllFalse();
 						}
 					} else if (drawingPanel.getSelectedShape() instanceof Circle) {
 						Circle c = (Circle) drawingPanel.getSelectedShape();
@@ -246,6 +306,7 @@ public class Paint extends JFrame {
 						dlgCircle.txtCenterX.setText(Integer.toString(c.getCenter().getX()));
 						dlgCircle.txtCenterY.setText(Integer.toString(c.getCenter().getY()));
 						dlgCircle.txtRadius.setText(Integer.toString(c.getRadius()));
+						dlgCircle.btnColor.setBackground(c.getColor());
 						dlgCircle.setVisible(true);
 						if (dlgCircle.getCircle() != null) {
 							Circle c2 = dlgCircle.getCircle();
@@ -254,20 +315,21 @@ public class Paint extends JFrame {
 							c.setRadius(c2.getRadius());
 							c.setColor(dlgCircle.getColor());
 							repaint();
+							drawingPanel.setAllFalse();
 						}
 					}
 				}
 			}
 		});
 
-		tglBtnEdit.setBackground(Color.GRAY);
-		buttonGroup.add(tglBtnEdit);
+		btnEdit.setBackground(Color.GRAY);
+		buttonGroup.add(btnEdit);
 		GridBagConstraints gbc_tglBtnEdit = new GridBagConstraints();
 		gbc_tglBtnEdit.insets = new Insets(0, 0, 5, 5);
 		gbc_tglBtnEdit.gridx = 10;
 		gbc_tglBtnEdit.gridy = 1;
-		pnlBtns.add(tglBtnEdit, gbc_tglBtnEdit);
-		tglBtnEdit.setPreferredSize(new Dimension(110, 30));
+		pnlBtns.add(btnEdit, gbc_tglBtnEdit);
+		btnEdit.setPreferredSize(new Dimension(110, 30));
 
 		drawingPanel.addMouseListener(pnlDrawingClickLitener());
 		contentPane.add(drawingPanel, BorderLayout.CENTER);
@@ -282,12 +344,14 @@ public class Paint extends JFrame {
 					drawingPanel.addShape(clickPoint);
 				} else if (tglBtnLine.isSelected()) {
 					Point startPoint = new Point(e.getX(), e.getY());
-					DlgLine dlgLine=new DlgLine();
+					DlgLine dlgLine = new DlgLine();
 					dlgLine.txtStartX.setText(Integer.toString(e.getX()));
 					dlgLine.txtStartY.setText(Integer.toString(e.getY()));
 					dlgLine.setVisible(true);
-					Line line=dlgLine.getLine();
-					drawingPanel.addShape(line);
+					if (dlgLine.getLine() != null) {
+						Line line = dlgLine.getLine();
+						drawingPanel.addShape(line);
+					}
 				} else if (tglBtnSelect.isSelected()) {
 					drawingPanel.select(e.getX(), e.getY());
 				} else if (tglBtnRectangle.isSelected()) {

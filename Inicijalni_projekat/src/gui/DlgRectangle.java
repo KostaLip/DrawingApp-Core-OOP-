@@ -31,7 +31,7 @@ public class DlgRectangle extends JDialog {
 	protected JTextArea txtWidth = new JTextArea();
 	protected JTextArea txtHeight = new JTextArea();
 	Rectangle rec = null;
-	private boolean colorChanged;
+	private boolean colorChanged=true;
 	Drawing drwPnl = new Drawing();
 	JButton btnColor = new JButton("CHOSE COLOR");
 	Color boja;
@@ -53,6 +53,7 @@ public class DlgRectangle extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgRectangle() {
+		getContentPane().setBackground(Color.PINK);
 		setTitle("EDIT RECTANGLE");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
@@ -62,6 +63,7 @@ public class DlgRectangle extends JDialog {
 		gridBagLayout.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
+		contentPanel.setBackground(Color.PINK);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		GridBagConstraints gbc_contentPanel = new GridBagConstraints();
 		gbc_contentPanel.fill = GridBagConstraints.BOTH;
@@ -149,7 +151,8 @@ public class DlgRectangle extends JDialog {
 			txtHeight.setLineWrap(true);
 		}
 		{
-			btnColor.setBackground(Color.RED);
+			btnColor.setForeground(Color.WHITE);
+			btnColor.setBackground(Color.BLACK);
 			btnColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Color initialColor = Color.BLACK;
@@ -165,6 +168,7 @@ public class DlgRectangle extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.PINK);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			GridBagConstraints gbc_buttonPane = new GridBagConstraints();
 			gbc_buttonPane.anchor = GridBagConstraints.NORTH;

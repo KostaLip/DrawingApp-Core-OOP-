@@ -32,7 +32,7 @@ public class DlgPoint extends JDialog {
 	protected JTextArea txtY = new JTextArea();
 	Point tacka = null;
 	Color boja;
-	private boolean colorChanged;
+	private boolean colorChanged=true;
 	JButton btnColor = new JButton("CHOSE COLOR");
 
 	/**
@@ -56,6 +56,7 @@ public class DlgPoint extends JDialog {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.PINK);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
@@ -104,7 +105,8 @@ public class DlgPoint extends JDialog {
 				txtY.setLineWrap(true);
 			}
 		}
-		btnColor.setBackground(Color.RED);
+		btnColor.setForeground(Color.WHITE);
+		btnColor.setBackground(Color.BLACK);
 		btnColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Color initialColor = Color.BLACK;
@@ -119,6 +121,7 @@ public class DlgPoint extends JDialog {
 		contentPanel.add(btnColor, gbc_btnColor);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.PINK);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
