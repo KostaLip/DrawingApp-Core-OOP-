@@ -36,6 +36,8 @@ public class DlgLine extends JDialog {
 	private Line line = null;
 	private boolean colorChanged = true;
 	protected JButton btnColor = new JButton("CHOSE COLOR");
+	private int maxX = 1905;
+	private int maxY = 885;
 
 	/**
 	 * Launch the application.
@@ -201,12 +203,18 @@ public class DlgLine extends JDialog {
 							} else if (y2 < 0) {
 								JOptionPane.showMessageDialog(null, "Y COORDINATE OF END POINT MUST BE GREATER THAN 0",
 										"ERROR", JOptionPane.ERROR_MESSAGE);
+							} else if (x1 >= maxX && x2 >= maxX) {
+								JOptionPane.showMessageDialog(null, "X COORDINATE IS TOO LARGE MUST BEE LESS THAN 1905",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
+							} else if (y1 >= maxY && y2 >= maxY) {
+								JOptionPane.showMessageDialog(null, "Y COORDINATE IS TOO LARGE MUST BEE LESS THAN 885",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
 							} else {
-								Point startPoint=new Point(x1,y1);
+								Point startPoint = new Point(x1, y1);
 								Point endPoint = new Point(x2, y2);
 								line = new Line(startPoint, endPoint);
-								if(colorChanged) {
-									boja=btnColor.getBackground();
+								if (colorChanged) {
+									boja = btnColor.getBackground();
 									line.setColor(boja);
 								}
 								dispose();

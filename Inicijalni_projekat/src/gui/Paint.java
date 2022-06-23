@@ -108,7 +108,6 @@ public class Paint extends JFrame {
 		buttonGroup.add(tglBtnPoint);
 		tglBtnPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				drawingPanel.getSelectedShape().setSelected(false);
 				drawingPanel.setAllFalse();
 			}
 		});

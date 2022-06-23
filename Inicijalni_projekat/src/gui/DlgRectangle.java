@@ -31,10 +31,12 @@ public class DlgRectangle extends JDialog {
 	protected JTextArea txtWidth = new JTextArea();
 	protected JTextArea txtHeight = new JTextArea();
 	Rectangle rec = null;
-	private boolean colorChanged=true;
+	private boolean colorChanged = true;
 	Drawing drwPnl = new Drawing();
 	JButton btnColor = new JButton("CHOSE COLOR");
 	Color boja;
+	private int maxX = 1905;
+	private int maxY = 885;
 
 	/**
 	 * Launch the application.
@@ -208,6 +210,12 @@ public class DlgRectangle extends JDialog {
 							} else if (y < 0) {
 								JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
+							} else if (x >= maxX) {
+								JOptionPane.showMessageDialog(null, "X COORDINATE IS TOO LARGE MUST BEE LESS THAN 1905",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
+							} else if (y >= maxY) {
+								JOptionPane.showMessageDialog(null, "Y COORDINATE IS TOO LARGE MUST BEE LESS THAN 885",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
 							} else if (width <= 0) {
 								JOptionPane.showMessageDialog(null, "WIDTH MUST BE STRICTLY GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);

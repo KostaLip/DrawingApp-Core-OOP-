@@ -79,7 +79,6 @@ public class FrameStack extends JFrame {
 
 				if (dlgStack.getCircle() != null) {
 					dlm.add(br, dlgStack.getCircle());
-					br++;
 				}
 			}
 		});

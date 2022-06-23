@@ -32,8 +32,10 @@ public class DlgCircle extends JDialog {
 	protected JTextArea txtRadius = new JTextArea();
 	Circle krug = null;
 	Color boja;
-	private boolean colorChanged=true;
+	private boolean colorChanged = true;
 	JButton btnColor = new JButton("CHOSE COLOR");
+	private int maxX = 1905;
+	private int maxY = 885;
 
 	/**
 	 * Launch the application.
@@ -169,6 +171,12 @@ public class DlgCircle extends JDialog {
 							} else if (y < 0) {
 								JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
+							} else if (x >= maxX) {
+								JOptionPane.showMessageDialog(null, "X COORDINATE IS TOO LARGE MUST BEE LESS THAN 1905",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
+							} else if (y >= maxY) {
+								JOptionPane.showMessageDialog(null, "Y COORDINATE IS TOO LARGE MUST BEE LESS THAN 885",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
 							} else if (radius <= 0) {
 								JOptionPane.showMessageDialog(null, "RADIUS MUST BE STRICTLY GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);

@@ -32,8 +32,10 @@ public class DlgPoint extends JDialog {
 	protected JTextArea txtY = new JTextArea();
 	Point tacka = null;
 	Color boja;
-	private boolean colorChanged=true;
+	private boolean colorChanged = true;
 	JButton btnColor = new JButton("CHOSE COLOR");
+	private int maxX = 1905;
+	private int maxY = 885;
 
 	/**
 	 * Launch the application.
@@ -146,6 +148,12 @@ public class DlgPoint extends JDialog {
 							} else if (y < 0) {
 								JOptionPane.showMessageDialog(null, "Y COORDINATE MUST BE GREATER THAN 0", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
+							} else if (x >= maxX) {
+								JOptionPane.showMessageDialog(null, "X COORDINATE IS TOO LARGE MUST BEE LESS THAN 1905",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
+							} else if (y >= maxY) {
+								JOptionPane.showMessageDialog(null, "Y COORDINATE IS TOO LARGE MUST BEE LESS THAN 885",
+										"ERROR", JOptionPane.ERROR_MESSAGE);
 							} else {
 								tacka = new Point(x, y);
 								if (colorChanged) {
