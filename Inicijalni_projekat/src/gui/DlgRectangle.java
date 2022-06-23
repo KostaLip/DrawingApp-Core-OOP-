@@ -31,7 +31,7 @@ public class DlgRectangle extends JDialog {
 	protected JTextArea txtWidth = new JTextArea();
 	protected JTextArea txtHeight = new JTextArea();
 	Rectangle rec = null;
-	private boolean colorChanged = true;
+	private boolean colorChanged = false;
 	Drawing drwPnl = new Drawing();
 	JButton btnColor = new JButton("CHOSE COLOR");
 	Color boja;

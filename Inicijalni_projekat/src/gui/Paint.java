@@ -207,6 +207,7 @@ public class Paint extends JFrame {
 						drawingPanel.getShapes().remove(drawingPanel.getSelectedShape());
 						repaint();
 						drawingPanel.setSelectedShape();
+						drawingPanel.setAllFalse();
 					}
 				}
 			}
