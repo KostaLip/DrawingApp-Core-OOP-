@@ -140,7 +140,7 @@ public class DlgCircle extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(Color.PINK);
+			buttonPane.setBackground(Color.CYAN);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

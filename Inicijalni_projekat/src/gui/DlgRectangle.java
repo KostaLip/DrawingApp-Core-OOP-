@@ -170,7 +170,7 @@ public class DlgRectangle extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(Color.PINK);
+			buttonPane.setBackground(Color.CYAN);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			GridBagConstraints gbc_buttonPane = new GridBagConstraints();
 			gbc_buttonPane.anchor = GridBagConstraints.NORTH;
