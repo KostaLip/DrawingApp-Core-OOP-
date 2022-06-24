@@ -27,7 +27,7 @@ public class Drawing extends JPanel {
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
 	int br;
 	private Shape selectedShape;
-	Color boja;
+	private Color boja;
 
 	public Drawing() {
 		setBackground(Color.WHITE);
