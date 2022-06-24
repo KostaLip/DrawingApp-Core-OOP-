@@ -57,7 +57,7 @@ public class DialogStack extends JDialog {
 	}
 
 	public DialogStack() {
-		setTitle("ADD RECTANGLE");
+		setTitle("ADD CIRCLE");
 		setModal(true);
 		setResizable(false);
 		setBounds(100, 100, 306, 250);

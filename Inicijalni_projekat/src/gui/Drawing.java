@@ -53,13 +53,15 @@ public class Drawing extends JPanel {
 
 	public void select(int x, int y) {
 		boolean blank = false;
+		boolean go = true;
 		for (br = shapes.size() - 1; br >= 0; br--) {
 			shapes.get(br).setSelected(false);
 			repaint();
-			if (shapes.get(br).contains(x, y)) {
+			if (shapes.get(br).contains(x, y) && go) {
 				shapes.get(br).setSelected(true);
 				selectedShape = shapes.get(br);
 				blank = true;
+				go = false;
 				repaint();
 			}
 		}
