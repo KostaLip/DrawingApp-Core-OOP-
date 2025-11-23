@@ -5,7 +5,7 @@ A foundational Java Swing-based drawing application demonstrating core Object-Or
 ## Related Projects
 
 This project serves as the foundation for a more advanced implementation:
-- [Java 2D Paint with Design Patterns](link) - Extended version with undo/redo, 
+- [Java 2D Paint with Design Patterns](https://github.com/KostaLip/DrawingAppDesignPatterns) - Extended version with undo/redo, 
   persistence, command logging, and 6 design pattern implementations
 
 ## Project Overview
